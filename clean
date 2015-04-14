@@ -1,2 +1,0 @@
-(rm .project Yylex.java parser.java sym.java *~ ; \
-rm -rf ./Example/)

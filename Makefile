@@ -33,7 +33,8 @@ run:
 test:
 	$(JAVA) -classpath $(CLASSPATH) Example.parser < sample.c
 
-clean:
+cleanup:
+	-rm *~
 	-rm *.class
 	-rm Yylex.java
 	-rm parser.java
