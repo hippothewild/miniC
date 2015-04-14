@@ -8,23 +8,30 @@ parser code {:
 	}
 :}
 
-terminal SEMI, PLUS, TIMES, LPAREN, RPAREN;
-terminal Integer NUMBER;
+/* Parenthesis and Brackets. */
+terminal LPAREN, RPAREN, LBRACKET, RBRACKET, LSQBRACKET, RSQBRACKET;
 
-non terminal expr_list, expr_part;
-non terminal Integer expr;
+/* Operators and Assigner. */
+terminal PLUS, MINUS, TIMES, DIVIDE, ASSIGN, UNOP;
 
-precedence left PLUS;
-precedence left TIMES;
+/* Comparer. */
+terminal LESS, GREATER, LESS_EQ, GREATER_EQ, EQ, NOT_EQ;
 
-expr_list ::= expr_list expr_part | expr_part;
-expr_part ::= expr:e {: System.out.println(" = "+e+";"); :} SEMI;
-expr      ::= NUMBER:n
-	      {: RESULT=n; :}
-            | expr:l PLUS expr:r
-	      {: RESULT=new Integer(l.intValue() + r.intValue()); :}
-	    | expr:l TIMES expr:r
-	      {: RESULT=new Integer(l.intValue() * r.intValue()); :}
-	    | LPAREN expr:e RPAREN
-	      {: RESULT=e; :}
-	    ;
+/* Tokens. */
+terminal TOKEN_INT, TOKEN_FLOAT, TOKEN_RETURN, TOKEN_WHILE, TOKEN_FOR, TOKEN_IF, TOKEN_SWITCH, TOKEN_CASE, TOKEN_BREAK, TOKEN_DEFAULT;
+
+/* Miscellaneous. */
+terminal SEMI, COMMA, NOT;
+
+/* Types. */
+terminal String IDENT;
+terminal Float FLOAT_NUM;
+terminal Integer INT_NUM;
+
+precedence left LPAREN, RPAREN;
+precedence right UNOP;
+precedence left TIMES, DIVIDE;
+precedence left PLUS, MINUS;
+precedence left GREATER, LESS, GREATER_EQ, LESS_EQ;
+precedence left EQ, NOT_EQ;
+precedence right ASSIGN;

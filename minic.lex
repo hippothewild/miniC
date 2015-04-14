@@ -23,10 +23,10 @@ import java_cup.runtime.Symbol;
 /* Comparer. */
 "<" { return new Symbol(sym.LESS); }
 ">" { return new Symbol(sym.GREATER); }
-"<=" { return new Symbol(sym.LESSEQ); }
-">=" { return new Symbol(sym.GREATEREQ); }
-"==" { return new Symbol(sym.EQUAL); }
-"!=" { return new Symbol(sym.NOTEQ); }
+"<=" { return new Symbol(sym.LESS_EQ); }
+">=" { return new Symbol(sym.GREATER_EQ); }
+"==" { return new Symbol(sym.EQ); }
+"!=" { return new Symbol(sym.NOT_EQ); }
 
 /* Tokens. */
 "int" { return new Symbol(sym.TOKEN_INT); }
@@ -49,8 +49,8 @@ import java_cup.runtime.Symbol;
 [A-Za-z][A-Za-z0-9_]* { return new Symbol(sym.IDENT, yytext()); }
 
 /* Number. */
-[0-9]+ { return new Symbol(sym.INTNUM, new Integer(yytext())); }
-[0-9]+.[0-9]+ { return new Symbol(sym.FLOATNUM, new Float(yytext())); }
+[0-9]+ { return new Symbol(sym.INT_NUM, new Integer(yytext())); }
+[0-9]+\.[0-9]+ { return new Symbol(sym.FLOAT_NUM, new Float(yytext())); }
 
 /* Whitespace. */
 [ \t\r\n\f] { /* ignore white space. */ }
