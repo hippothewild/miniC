@@ -24,9 +24,35 @@ terminal TOKEN_INT, TOKEN_FLOAT, TOKEN_RETURN, TOKEN_WHILE, TOKEN_FOR, TOKEN_IF,
 terminal SEMI, COMMA, NOT;
 
 /* Types. */
-terminal String IDENT;
-terminal Float FLOAT_NUM;
-terminal Integer INT_NUM;
+terminal String		IDENT;
+terminal Float		FLOAT_NUM;
+terminal Integer	INT_NUM;
+
+/* Non-terminal program rules. */
+non terminal Program		program;
+non terminal DeclList		declList;
+non terminal FuncList		funcList;
+non terminal Declaration	declaration;
+non terminal IdentList		identList;
+non terminal Identifier		identifier;
+non terminal Function		function;
+non terminal ParamList      paramList;
+non terminal Type           type;
+non terminal CompoundStmt	compountStmt;
+non terminal StmtList		stmtList;
+non terminal Stmt			stmt;
+non terminal AssignStmt		assignStmt;
+non terminal Assign			assign;
+non terminal CallStmt		callStmt;
+non terminal Call			call;
+non terminal RetStmt		retStmt;
+non terminal WhileStmt		whileStmt;
+non terminal ForStmt		forStmt;
+non terminal IfStmt			ifStmt;
+non terminal SwitchStmt		switchStmt;
+non terminal CaseList		caseList;
+non terminal Expr			expr;
+non terminal ArgList		argList;
 
 precedence left LPAREN, RPAREN;
 precedence right UNOP;
