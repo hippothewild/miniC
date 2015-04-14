@@ -31,11 +31,12 @@ $ make cleanup
 Reference
 -------
 ###### Project 01
-Manual of CUP(in Korean): https://wiki.kldp.org/wiki.php/CUPManual
-Skeleton code with Java-CUP and JLex: https://github.com/gmh33/Java-CUP-jLex-Example
-Resolving Dangling-else Problem: http://www.parsifalsoft.com/ifelse.html
-Resolving Reused Token(UNOP) Problem: http://www.cs.princeton.edu/~appel/modern/java/CUP/manual.html
+Manual of CUP(in Korean): https://wiki.kldp.org/wiki.php/CUPManual  
+Skeleton code with Java-CUP and JLex: https://github.com/gmh33/Java-CUP-jLex-Example  
+Resolving Dangling-else Problem: http://www.parsifalsoft.com/ifelse.html  
 
 Copyright
 -------
-Jihwan Chun <jihwan0321@kaist.ac.kr>, Last update Apr-15-2015
+Jihwan Chun  
+<jihwan0321@kaist.ac.kr>  
+Last update Apr-15-2015  
