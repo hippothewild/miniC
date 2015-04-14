@@ -47,6 +47,7 @@ import java_cup.runtime.Symbol;
 
 /* Miscellaneous. */
 ";" { return new Symbol(sym.SEMI); }
+":" { return new Symbol(sym.COLON); }
 "," { return new Symbol(sym.COMMA); }
 /* "!" { return new Symbol(sym.NOT); } */
 

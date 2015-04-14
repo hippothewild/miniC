@@ -53,6 +53,7 @@ non terminal ForStmt		forStmt;
 non terminal IfStmt			ifStmt;
 non terminal SwitchStmt		switchStmt;
 non terminal CaseList		caseList;
+non terminal CaseStmt		caseStmt;
 non terminal Expr			expr;
 non terminal ArgList		argList;
 
@@ -68,10 +69,10 @@ precedence right ASSIGN;
 /* Program grammars. */
 /* Note :: p == epsilon */
 
-program	::= declList funcList
+program	::= p
+		  | declList funcList
 		  | declList
 		  | funcList
-		  | p
 		  ;
 
 declList ::= declaration
@@ -152,10 +153,38 @@ ifStmt ::= TOKEN_IF LPAREN expr RPAREN stmt
 		 | TOKEN_IF LPAREN expr RPAREN stmt TOKEN_ELSE stmt
 		 ;
 
-switchStmt ::= ;
+switchStmt ::= TOKEN_SWITCH LPAREN identifier RPAREN LBRACKET caseList RBRACKET
+			 ;
 
-caseList ::= ;
+caseList ::= caseStmt
+		   | caseStmt TOKEN_DEFAULT COLON stmtList
+		   | caseStmt TOKEN_DEFAULT COLON stmtList TOKEN_BREAK SEMI
+		   ;
 
-expr ::= ;
+caseStmt ::= p
+		   | caseStmt TOKEN_CASE INT_NUM COLON stmtList
+		   | caseStmt TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
+		   ;
 
-argList ::= ;
+expr ::= UNOP expr
+	   | expr TIMES expr
+	   | expr DIVIDE expr
+	   | expr PLUS expr
+	   | expr MINUS expr
+	   | expr LESS expr
+	   | expr GREATER expr
+	   | expr LESS_EQ expr
+	   | expr GREATER_EQ expr
+	   | expr EQ expr
+	   | expr NOT_EQ expr
+	   | call
+	   | INT_NUM
+	   | FLOAT_NUM
+	   | ID
+	   | ID LSQBRACKET expr RSQBRACKET
+	   | LPAREN expr RPAREN
+	   ;
+
+argList ::= expr
+		  | argList COMMA expr
+		  ;
