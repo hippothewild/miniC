@@ -51,4 +51,4 @@ import java_cup.runtime.*;
 
 [ \t\r\n\f] { /* ignore white space and newline. */ }
 
-. { System.err.println("Illegal character in: "+yytext()); System.exit(0); }
+. { System.err.println("Illegal character in: "+yytext()); }
