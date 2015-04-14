@@ -18,7 +18,7 @@ terminal PLUS, MINUS, TIMES, DIVIDE, ASSIGN, UNOP;
 terminal LESS, GREATER, LESS_EQ, GREATER_EQ, EQ, NOT_EQ;
 
 /* Tokens. */
-terminal TOKEN_INT, TOKEN_FLOAT, TOKEN_RETURN, TOKEN_WHILE, TOKEN_FOR, TOKEN_IF, TOKEN_SWITCH, TOKEN_CASE, TOKEN_BREAK, TOKEN_DEFAULT;
+terminal TOKEN_INT, TOKEN_FLOAT, TOKEN_RETURN, TOKEN_WHILE, TOKEN_DO, TOKEN_FOR, TOKEN_IF, TOKEN_ELSE, TOKEN_CASE, TOKEN_SWITCH, TOKEN_BREAK, TOKEN_DEFAULT;
 
 /* Identifier. */
 terminal String ID;
@@ -28,9 +28,35 @@ terminal Float		FLOAT_NUM;
 terminal Integer	INT_NUM;
 
 /* Miscellaneous. */
-terminal SEMI, COMMA, NOT;
+terminal SEMI, COLON, COMMA;
 
 /* Non-terminal program rules. */
+non terminal program;
+non terminal declList;
+non terminal funcList;
+non terminal declaration;
+non terminal identList;
+non terminal identifier;
+non terminal function;
+non terminal paramList;
+non terminal type;
+non terminal compoundStmt;
+non terminal stmtList;
+non terminal stmt;
+non terminal assignStmt;
+non terminal assign;
+non terminal callStmt;
+non terminal call;
+non terminal retStmt;
+non terminal whileStmt;
+non terminal forStmt;
+non terminal ifStmt;
+non terminal switchStmt;
+non terminal caseList;
+non terminal caseStmt;
+non terminal expr;
+non terminal argList;
+/*
 non terminal Program		program;
 non terminal DeclList		declList;
 non terminal FuncList		funcList;
@@ -38,7 +64,7 @@ non terminal Declaration	declaration;
 non terminal IdentList		identList;
 non terminal Identifier		identifier;
 non terminal Function		function;
-non terminal ParamList      paramList;
+non terminal ParamList		paramList;
 non terminal Type           type;
 non terminal CompoundStmt	compoundStmt;
 non terminal StmtList		stmtList;
@@ -56,6 +82,7 @@ non terminal CaseList		caseList;
 non terminal CaseStmt		caseStmt;
 non terminal Expr			expr;
 non terminal ArgList		argList;
+*/
 
 precedence left LPAREN, RPAREN;
 precedence right UNOP;
@@ -67,9 +94,8 @@ precedence right ASSIGN;
 
 
 /* Program grammars. */
-/* Note :: p == epsilon */
 
-program	::= p
+program	::=
 		  | declList funcList
 		  | declList
 		  | funcList
@@ -110,7 +136,7 @@ compoundStmt ::= LBRACKET stmtList RBRACKET
 			   | LBRACKET declList stmtList RBRACKET
 			   ;
 
-stmtList ::= p
+stmtList ::=
 		   | stmtList stmt;
 
 stmt ::= assignStmt
@@ -161,7 +187,7 @@ caseList ::= caseStmt
 		   | caseStmt TOKEN_DEFAULT COLON stmtList TOKEN_BREAK SEMI
 		   ;
 
-caseStmt ::= p
+caseStmt ::=
 		   | caseStmt TOKEN_CASE INT_NUM COLON stmtList
 		   | caseStmt TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
 		   ;

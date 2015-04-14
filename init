@@ -1,4 +1,4 @@
 (java JLex.Main minic.lex && \
-mv minimal.lex.java Yylex.java && \
+mv minic.lex.java Yylex.java && \
 java java_cup.Main minic.cup && \
 javac -d . parser.java sym.java Yylex.java)
