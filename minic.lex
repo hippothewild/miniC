@@ -46,7 +46,7 @@ import java_cup.runtime.Symbol;
 /* "!" { return new Symbol(sym.NOT); } */
 
 /* Identifier. */
-[A-Za-z][A-Za-z0-9_]* { return new Symbol(sym.IDENT, yytext()); }
+[A-Za-z][A-Za-z0-9_]* { return new Symbol(sym.ID, yytext()); }
 
 /* Number. */
 [0-9]+ { return new Symbol(sym.INT_NUM, new Integer(yytext())); }

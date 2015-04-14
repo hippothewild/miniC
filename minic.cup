@@ -24,7 +24,7 @@ terminal TOKEN_INT, TOKEN_FLOAT, TOKEN_RETURN, TOKEN_WHILE, TOKEN_FOR, TOKEN_IF,
 terminal SEMI, COMMA, NOT;
 
 /* Types. */
-terminal String		IDENT;
+terminal String		ID;
 terminal Float		FLOAT_NUM;
 terminal Integer	INT_NUM;
 
@@ -38,7 +38,7 @@ non terminal Identifier		identifier;
 non terminal Function		function;
 non terminal ParamList      paramList;
 non terminal Type           type;
-non terminal CompoundStmt	compountStmt;
+non terminal CompoundStmt	compoundStmt;
 non terminal StmtList		stmtList;
 non terminal Stmt			stmt;
 non terminal AssignStmt		assignStmt;
@@ -61,3 +61,63 @@ precedence left PLUS, MINUS;
 precedence left GREATER, LESS, GREATER_EQ, LESS_EQ;
 precedence left EQ, NOT_EQ;
 precedence right ASSIGN;
+
+
+/* Program grammars. */
+/* Note :: p == epsilon */
+
+program	::= declList funcList
+		  | declList
+		  | funcList
+		  | p
+		  ;
+
+declList ::= declaration
+		   | declList declaration
+		   ;
+
+funcList ::= function
+		   | funcList function
+		   ;
+
+declaration ::= type identList SEMI
+			  ;
+
+identList ::= identifier
+			| identList COMMA identifier
+			;
+
+identifier ::= ID
+			 | ID LSQBRACKET INT_NUM RSQBRACKET
+			 ;
+
+function ::= type ID LPAREN RPAREN compoundStmt
+		   | type ID LPAREN paramList RPAREN compoundStmt
+		   ;
+
+paramList ::= type identifier
+			| paramList COMMA type identifier
+			;
+
+type ::= TOKEN_INT
+	   | TOKEN_FLOAT
+	   ;
+
+compoundStmt ::= LBRACKET stmtList RBRACKET
+			   | LBRACKET declList stmtList RBRACKET
+			   ;
+
+stmtList ::= ;
+stmt ::= ;
+assignStmt ::= ;
+assign ::= ;
+callStmt ::= ;
+call ::= ;
+retStmt ::= ;
+whileStmt ::= ;
+forStmt ::= ;
+ifStmt ::= ;
+switchStmt ::= ;
+caseList ::= ;
+expr ::= ;
+argList ::= ;
