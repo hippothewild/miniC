@@ -114,7 +114,7 @@ funcList ::= function
 		{:System.out.println("[funcList]");:}
 		   ;
 
-declaration ::= type identList
+declaration ::= type identList SEMI
 		{:System.out.println("[declaration]");:}
 			  ;
 
