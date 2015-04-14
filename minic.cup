@@ -2,6 +2,9 @@ package Example;
 
 import java_cup.runtime.*;
 
+action code {:
+:}
+
 parser code {:
 	public static void main(String args[]) throws Exception {
 		new parser(new Yylex(System.in)).parse();
@@ -96,9 +99,9 @@ precedence right ASSIGN;
 /* Program grammars. */
 
 program	::=
-		  | declList funcList
 		  | declList
 		  | funcList
+		  | declList funcList
 		  ;
 
 declList ::= declaration

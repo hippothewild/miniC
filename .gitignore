@@ -15,3 +15,6 @@ sample.c
 # Vim backup
 *.*.swp
 *~
+
+# Compiled class file
+.class
