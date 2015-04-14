@@ -137,7 +137,8 @@ compoundStmt ::= LBRACKET stmtList RBRACKET
 			   ;
 
 stmtList ::=
-		   | stmtList stmt;
+		   | stmtList stmt
+		   ;
 
 stmt ::= assignStmt
 	   | callStmt

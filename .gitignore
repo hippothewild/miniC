@@ -6,9 +6,12 @@ parser.java
 sym.java
 Example/
 
+# Sample C file
+sample.c
+
 # Mac file store
 .DS_Store
 
 # Vim backup
-.swp
+*.*.swp
 *~
