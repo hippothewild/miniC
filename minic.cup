@@ -20,13 +20,15 @@ terminal LESS, GREATER, LESS_EQ, GREATER_EQ, EQ, NOT_EQ;
 /* Tokens. */
 terminal TOKEN_INT, TOKEN_FLOAT, TOKEN_RETURN, TOKEN_WHILE, TOKEN_FOR, TOKEN_IF, TOKEN_SWITCH, TOKEN_CASE, TOKEN_BREAK, TOKEN_DEFAULT;
 
-/* Miscellaneous. */
-terminal SEMI, COMMA, NOT;
+/* Identifier. */
+terminal String ID;
 
 /* Types. */
-terminal String		ID;
 terminal Float		FLOAT_NUM;
 terminal Integer	INT_NUM;
+
+/* Miscellaneous. */
+terminal SEMI, COMMA, NOT;
 
 /* Non-terminal program rules. */
 non terminal Program		program;
@@ -58,7 +60,7 @@ precedence left LPAREN, RPAREN;
 precedence right UNOP;
 precedence left TIMES, DIVIDE;
 precedence left PLUS, MINUS;
-precedence left GREATER, LESS, GREATER_EQ, LESS_EQ;
+precedence left LESS, GREATER, LESS_EQ, GREATER_EQ;
 precedence left EQ, NOT_EQ;
 precedence right ASSIGN;
 

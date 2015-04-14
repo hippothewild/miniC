@@ -5,6 +5,9 @@ import java_cup.runtime.Symbol;
 %cup
 %%
 
+/* Minus sign. (UNOP) */
+"-" { return new Symbol(sym.UNOP); }
+
 /* Parenthesis and Brackets. */
 "(" { return new Symbol(sym.LPAREN); }
 ")" { return new Symbol(sym.RPAREN); }
