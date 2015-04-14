@@ -189,7 +189,7 @@ retStmt ::= TOKEN_RETURN SEMI
 
 
 whileStmt ::= TOKEN_WHILE LPAREN expr RPAREN stmt
-			| TOKEN_DO stmt TOKEN_WHILE LPAREN expr RPAREN
+			| TOKEN_DO stmt TOKEN_WHILE LPAREN expr RPAREN SEMI
 			;
 
 forStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN stmt
