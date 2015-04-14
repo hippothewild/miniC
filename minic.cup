@@ -43,57 +43,45 @@ non terminal identifier;
 non terminal function;
 non terminal paramList;
 non terminal type;
-non terminal compoundStmt;
 non terminal stmtList;
-non terminal stmt;
-non terminal assignStmt;
-non terminal assign;
-non terminal callStmt;
-non terminal call;
-non terminal retStmt;
-non terminal whileStmt;
-non terminal forStmt;
-non terminal ifStmt;
-non terminal switchStmt;
-non terminal caseList;
-non terminal caseStmt;
 non terminal expr;
 non terminal argList;
-/*
-non terminal Program		program;
-non terminal DeclList		declList;
-non terminal FuncList		funcList;
-non terminal Declaration	declaration;
-non terminal IdentList		identList;
-non terminal Identifier		identifier;
-non terminal Function		function;
-non terminal ParamList		paramList;
-non terminal Type           type;
-non terminal CompoundStmt	compoundStmt;
-non terminal StmtList		stmtList;
-non terminal Stmt			stmt;
-non terminal AssignStmt		assignStmt;
-non terminal Assign			assign;
-non terminal CallStmt		callStmt;
-non terminal Call			call;
-non terminal RetStmt		retStmt;
-non terminal WhileStmt		whileStmt;
-non terminal ForStmt		forStmt;
-non terminal IfStmt			ifStmt;
-non terminal SwitchStmt		switchStmt;
-non terminal CaseList		caseList;
-non terminal CaseStmt		caseStmt;
-non terminal Expr			expr;
-non terminal ArgList		argList;
-*/
 
-precedence right ASSIGN;
-precedence left EQ, NOT_EQ;
-precedence left LESS, GREATER, LESS_EQ, GREATER_EQ;
-precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE;
-precedence right UNOP;
+/* Non-terminal statement definition. */
+non terminal stmt, openStmt, closedStmt;
+
+/* Non-ternimal OPENED statement. */
+non terminal ifStmt;
+non terminal ifElseOpenStmt;
+non terminal whileOpenStmt;
+non terminal forOpenStmt;
+
+/* Non-terminal CLOSED statement. */
+non terminal ifElseClosedStmt;
+non terminal doWhileStmt;
+non terminal whileClosedStmt;
+non terminal forClosedStmt;
+non terminal compoundStmt;
+non terminal assignStmt;
+non terminal callStmt;
+non terminal retStmt;
+non terminal switchStmt;
+
+/* Element of CLOSED statement. */
+non terminal caseList;
+non terminal caseBlock;
+non terminal assign;
+non terminal call;
+
 precedence left LPAREN, RPAREN;
+precedence right UNOP;
+precedence left TOKEN_ELSE;
+precedence left TIMES, DIVIDE;
+precedence left PLUS, MINUS;
+precedence left LESS, GREATER, LESS_EQ, GREATER_EQ;
+precedence left EQ, NOT_EQ;
+precedence right ASSIGN;
+
 
 /* Program grammars. */
 
@@ -142,16 +130,51 @@ stmtList ::=
 		   | stmtList stmt
 		   ;
 
-stmt ::= assignStmt
-	   | callStmt
-	   | retStmt
-       | whileStmt
-	   | forStmt
-	   | ifStmt
-	   | switchStmt
-	   | compoundStmt
-	   | SEMI
+stmt ::= openStmt
+	   | closedStmt
 	   ;
+
+openStmt ::= ifStmt
+		   | ifElseOpenStmt
+		   | forOpenStmt
+		   | whileOpenStmt
+		   ;
+
+closedStmt ::= ifElseClosedStmt
+			 | doWhileStmt
+			 | whileClosedStmt
+			 | forClosedStmt
+			 | compoundStmt
+			 | assignStmt
+			 | callStmt
+			 | retStmt
+			 | switchStmt
+			 | SEMI
+			 ;
+
+ifStmt ::= TOKEN_IF LPAREN expr RPAREN stmt
+		 ;
+
+ifElseOpenStmt ::= TOKEN_IF LPAREN expr RPAREN closedStmt TOKEN_ELSE openStmt
+				 ;
+
+ifElseClosedStmt ::= TOKEN_IF LPAREN expr RPAREN closedStmt TOKEN_ELSE closedStmt
+				   ;
+
+forOpenStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN openStmt
+			  ;
+
+forClosedStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN closedStmt
+			  ;
+
+whileOpenStmt ::= TOKEN_WHILE LPAREN expr RPAREN openStmt
+				;
+
+whileClosedStmt ::= TOKEN_WHILE LPAREN expr RPAREN closedStmt
+				;
+
+doWhileStmt ::= TOKEN_DO stmt TOKEN_WHILE LPAREN expr RPAREN SEMI
+			  ;
 
 assignStmt ::= assign SEMI
 			 ;
@@ -171,30 +194,18 @@ retStmt ::= TOKEN_RETURN SEMI
 		  | TOKEN_RETURN expr SEMI
 		  ;
 
-
-whileStmt ::= TOKEN_WHILE LPAREN expr RPAREN stmt
-			| TOKEN_DO stmt TOKEN_WHILE LPAREN expr RPAREN SEMI
-			;
-
-forStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN stmt
-		  ;
-
-ifStmt ::= TOKEN_IF LPAREN expr RPAREN stmt
-		 | TOKEN_IF LPAREN expr RPAREN stmt TOKEN_ELSE stmt
-		 ;
-
 switchStmt ::= TOKEN_SWITCH LPAREN identifier RPAREN LBRACKET caseList RBRACKET
 			 ;
 
-caseList ::= caseStmt
-		   | caseStmt TOKEN_DEFAULT COLON stmtList
-		   | caseStmt TOKEN_DEFAULT COLON stmtList TOKEN_BREAK SEMI
+caseList ::= caseBlock
+		   | caseBlock TOKEN_DEFAULT COLON stmtList
+		   | caseBlock TOKEN_DEFAULT COLON stmtList TOKEN_BREAK SEMI
 		   ;
 
-caseStmt ::=
-		   | caseStmt TOKEN_CASE INT_NUM COLON stmtList
-		   | caseStmt TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
-		   ;
+caseBlock ::=
+			| caseBlock TOKEN_CASE INT_NUM COLON stmtList
+			| caseBlock TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
+			;
 
 expr ::= UNOP expr
 	   | expr TIMES expr
