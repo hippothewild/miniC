@@ -25,13 +25,13 @@ all:
 	$(JAVA) JLex.Main minic.lex
 	mv minic.lex.java Yylex.java
 	$(JAVAC) Program.java
-	$(JAVAC) sym.java parser.java Yylex.java
+	$(JAVAC) -d $(CLASSPATH) sym.java parser.java Yylex.java
 
 run:
-	$(JAVA) -classpath $(CLASSPATH) parser
+	$(JAVA) -classpath $(CLASSPATH) Example.parser
 
 test:
-	$(JAVA) -classpath $(CLASSPATH) parser < sample.c
+	$(JAVA) -classpath $(CLASSPATH) Example.parser < sample.c
 
 clean:
 	-rm *.class
@@ -46,3 +46,5 @@ vclean:
 	-rm sym.java
 	-rm java_cup/*.class
 	-rm java_cup/runtime/*.class
+	-rm Example/*.class
+	-rm -r Example/
