@@ -5,8 +5,6 @@ import java_cup.runtime.*;
 %cup
 %%
 
-"-" { return new Symbol(sym.UNOP); }
-
 "(" { return new Symbol(sym.LPAREN); }
 ")" { return new Symbol(sym.RPAREN); }
 "{" { return new Symbol(sym.LBRACKET); }

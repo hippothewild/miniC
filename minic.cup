@@ -207,7 +207,8 @@ caseBlock ::=
 			| caseBlock TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
 			;
 
-expr ::= UNOP expr
+expr ::= MINUS expr
+		 %prec UNOP
 	   | expr TIMES expr
 	   | expr DIVIDE expr
 	   | expr PLUS expr
