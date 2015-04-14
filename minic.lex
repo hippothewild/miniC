@@ -52,7 +52,7 @@ import java_cup.runtime.Symbol;
 [0-9]+ { return new Symbol(sym.INT_NUM, new Integer(yytext())); }
 [0-9]+\.[0-9]+ { return new Symbol(sym.FLOAT_NUM, new Float(yytext())); }
 
-/* Whitespace. */
-[ \t\r\n\f] { /* ignore white space. */ }
+/* Whitespace and newline. */
+[ \t\r\n\f] { /* ignore white space and newline. */ }
 
-. { System.err.println("Illegal character: "+yytext()); }
+. { System.err.println("Illegal character:"+yyline+":"+yychar+""); System.exit(0); }
