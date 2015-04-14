@@ -107,17 +107,53 @@ compoundStmt ::= LBRACKET stmtList RBRACKET
 			   | LBRACKET declList stmtList RBRACKET
 			   ;
 
-stmtList ::= ;
-stmt ::= ;
-assignStmt ::= ;
-assign ::= ;
-callStmt ::= ;
-call ::= ;
-retStmt ::= ;
-whileStmt ::= ;
-forStmt ::= ;
-ifStmt ::= ;
+stmtList ::= p
+		   | stmtList stmt;
+
+stmt ::= assignStmt
+	   | callStmt
+	   | retStmt
+       | whileStmt
+	   | forStmt
+	   | ifStmt
+	   | switchStmt
+	   | compoundStmt
+	   | SEMI
+	   ;
+
+assignStmt ::= assign SEMI
+			 ;
+
+assign ::= ID ASSIGN expr
+		 | ID LSQBRACKET expr RSQBRACKET ASSIGN expr
+		 ;
+
+callStmt ::= call SEMI
+		   ;
+
+call ::= ID LPAREN RPAREN
+	   | ID LPAREN argList RPAREN
+       ;
+
+retStmt ::= TOKEN_RETURN SEMI
+		  | TOKEN_RETURN expr SEMI
+		  ;
+
+whileStmt ::= TOKEN_WHILE LPAREN expr RPAREN stmt
+			| TOKEN_DO stmt TOKEN_WHILE LPAREN expr RPAREN SEMI
+			;
+
+forStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN stmt
+		  ;
+
+ifStmt ::= TOKEN_IF LPAREN expr RPAREN stmt
+		 | TOKEN_IF LPAREN expr RPAREN stmt TOKEN_ELSE stmt
+		 ;
+
 switchStmt ::= ;
+
 caseList ::= ;
+
 expr ::= ;
+
 argList ::= ;
