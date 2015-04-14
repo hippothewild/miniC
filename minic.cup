@@ -101,56 +101,45 @@ program	::=
 		  | declList
 		  | funcList
 		  | declList funcList
-		{:System.out.println("[program]");:}
 		  ;
 
 declList ::= declaration
 		   | declList declaration
-		{:System.out.println("[declList]");:}
 		   ;
 
 funcList ::= function
 		   | funcList function
-		{:System.out.println("[funcList]");:}
 		   ;
 
 declaration ::= type identList SEMI
-		{:System.out.println("[declaration]");:}
 			  ;
 
 identList ::= identifier
 			| identList COMMA identifier
-		{:System.out.println("[identList]");:}
 			;
 
 identifier ::= ID
 			 | ID LSQBRACKET INT_NUM RSQBRACKET
-		{:System.out.println("[identifier]");:}
 			 ;
 
 function ::= type ID LPAREN RPAREN compoundStmt
 		   | type ID LPAREN paramList RPAREN compoundStmt
-		{:System.out.println("[function]");:}
 		   ;
 
 paramList ::= type identifier
 			| paramList COMMA type identifier
-		{:System.out.println("[paramList]");:}
 			;
 
 type ::= TOKEN_INT
 	   | TOKEN_FLOAT
-	{:System.out.println("[type]");:}
 	   ;
 
 compoundStmt ::= LBRACKET stmtList RBRACKET
 			   | LBRACKET declList stmtList RBRACKET
-			{:System.out.println("[compoundStmt]");:}
 			   ;
 
 stmtList ::=
 		   | stmtList stmt
-		{:System.out.println("[stmtList]");:}
 		   ;
 
 stmt ::= assignStmt
@@ -162,25 +151,20 @@ stmt ::= assignStmt
 	   | switchStmt
 	   | compoundStmt
 	   | SEMI
-	{:System.out.println("[stmt]");:}
 	   ;
 
 assignStmt ::= assign SEMI
-	{:System.out.println("[assignStmt]");:}
 			 ;
 
 assign ::= ID ASSIGN expr
 		 | ID LSQBRACKET expr RSQBRACKET ASSIGN expr
-		{:System.out.println("[assign]");:}
 		 ;
 
 callStmt ::= call SEMI
-		{:System.out.println("[callStmt]");:}
 		   ;
 
 call ::= ID LPAREN RPAREN
 	   | ID LPAREN argList RPAREN
-	{:System.out.println("[call]");:}
        ;
 
 retStmt ::= TOKEN_RETURN SEMI
@@ -197,7 +181,6 @@ forStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN stmt
 
 ifStmt ::= TOKEN_IF LPAREN expr RPAREN stmt
 		 | TOKEN_IF LPAREN expr RPAREN stmt TOKEN_ELSE stmt
-		{:System.out.println("[ifStmt]");:}
 		 ;
 
 switchStmt ::= TOKEN_SWITCH LPAREN identifier RPAREN LBRACKET caseList RBRACKET
@@ -230,7 +213,6 @@ expr ::= UNOP expr
 	   | ID
 	   | ID LSQBRACKET expr RSQBRACKET
 	   | LPAREN expr RPAREN
-	{:System.out.println("[expr]");:}
 	   ;
 
 argList ::= expr
