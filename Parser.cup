@@ -1,0 +1,190 @@
+package miny_pascal;
+
+import java_cup.runtime.*;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+/* Preliminaries to set up and use the scanner.  */
+parser code 
+{:
+
+	public Node root = null;
+
+	public static parser getParser(String pPath) throws Exception {
+		InputStream is = null;
+		is = new FileInputStream(pPath);
+
+		return new parser(new Yylex(is));
+	}
+
+	public Node getTree() throws Exception {
+		if (root == null) {
+			this.parse();
+		}
+		return root;
+	}
+
+	public static void main(String args[]) throws Exception {
+		new parser(new Yylex(System.in)).parse();
+	}
+
+:}
+
+
+/* Terminals (tokens returned by the scanner). */
+terminal PROGRAM, BEGIN, END, DECLARE, PROCEDURE, FUNCTION, LABEL, INTEGER, REAL, RECORD;
+terminal BOOLEAN, ARRAY, OF, ASSIGN, LC, RC, IF, THEN, ELSE, WHILE, REPEAT, FI, DO, OD;
+terminal READ, WRITE, TRUE, FALSE, ADD, MIN, MUL, DIV, GOTO;
+terminal MOD, LES, LEQ, EQU, NEQ, GRE, GEQ, AND, OR;
+terminal NOT, CASE, FOR, FIN, IDENTICAL, FROM, BY, TO, NEW;
+terminal UMIN, COLON, SEMI, LPAR, RPAR, LPAR_SQ, RPAR_SQ, DOT, COMMA, PTR;
+
+terminal Integer INTCONST;
+terminal String IDE;
+terminal Double REALCONST;
+terminal String STRING;
+
+
+/* Non terminals */
+non terminal Node var, assign, program, stat_seq, loop_stat, case_stat, decl_list, decl;
+non terminal Node expr, atom, block, stat, nonlable_stat, cond_stat, case, case_list;
+non terminal Node var_decl, type, simple_type, array_type, record_type, address_type, ide_type;
+non terminal Node record_list, dim, dim_list, proc_decl, formal_list, formal, func_decl, proc_stat, expr_list;
+non terminal Node inout_stat, new_stat;
+
+
+/* Precedences */
+precedence nonassoc LES, LEQ, EQU, NEQ, GRE, GEQ;
+precedence left ADD, MIN, OR;
+precedence left MUL, DIV, AND, MOD;
+precedence left UMIN;
+precedence right NOT;
+precedence right DOT;
+precedence right PTR;
+
+
+/* Grammar */
+
+start with program;
+
+
+program ::= PROGRAM IDE:n block:b            {: RESULT = new Program(b,n); parser.root=RESULT; :} ;
+
+block ::= LC stat_seq:s RC                   {: RESULT = new Block(s); :}
+		  | decl_list:d LC stat_seq:s RC     {: RESULT = new Block(d,s); :} ;
+
+decl_list ::= decl:d                         {: RESULT = new DeclarationList(d); :}
+			  | decl:d decl_list:dl         {: RESULT = new DeclarationList(dl,d); :} ;
+
+decl ::= var_decl:vd                         {: RESULT = vd; :}
+		 | proc_decl:pd                      {: RESULT = pd; :}
+		 | func_decl:fd                      {: RESULT = fd; :} ;
+
+proc_decl ::= PROCEDURE IDE:n block:b                             {: RESULT = new ProcedureDeclaration(b,n); :}
+			  | PROCEDURE IDE:n LPAR formal_list:fl RPAR block:b    {: RESULT = new ProcedureDeclaration(fl,b,n); :} ;
+
+func_decl ::= FUNCTION IDE:n COLON type:t block:b                   {: RESULT = new FunctionDeclaration(t,b,n); :}
+			  | FUNCTION IDE:n LPAR formal_list:fl RPAR COLON type:t block:b   {: RESULT = new FunctionDeclaration(t,fl,b,n); :} ;
+			  
+formal_list ::= formal:p                                          {: RESULT = new ParameterList(p); :}
+				| formal:p COMMA formal_list:pl                     {: RESULT = new ParameterList(p,pl); :};
+
+formal ::= IDE:n type:t                                           {: RESULT = new ByValueParameter(t,n); :}
+		   | IDE:n type:t IDENTICAL                               {: RESULT = new ByReferenceParameter(t,n); :} ;
+
+var_decl ::= IDE:n type:t SEMI                                     {: RESULT = new VariableDeclaration(t,n); :} ;
+
+type ::= simple_type:st                    						  {: RESULT = st; :}
+		 | array_type:at                     					  {: RESULT = at; :}
+		 | record_type:rt                    					  {: RESULT = rt; :}
+		 | address_type:at                   					  {: RESULT = at; :}
+		 | ide_type:it                       					  {: RESULT = it; :} ;
+	   
+simple_type ::= INTEGER                  						  {: RESULT = new SimpleType("Integer"); :}
+				| REAL                     						  {: RESULT = new SimpleType("Real"); :}
+				| BOOLEAN                  						  {: RESULT = new SimpleType("Boolean"); :} ;
+
+array_type ::= ARRAY LPAR_SQ INTCONST:i1  COLON INTCONST:i2 RPAR_SQ OF type:t  {: RESULT = new ArrayType(i1,i2,t); :} ;
+
+record_type ::= RECORD LC record_list:rl RC     {: RESULT = new RecordType(rl); :} ;
+
+record_list ::= var_decl:vd                     {: RESULT = new RecordList(vd); :}
+				| var_decl:vd record_list:rl    {: RESULT = new RecordList(vd,rl); :} ;
+
+address_type ::= PTR type:t                     {: RESULT = new AddressType(t); :} ;
+
+ide_type ::= IDE:n                              {: RESULT = new IdeType(n); :} ;
+
+stat_seq ::= stat:s                             {: RESULT = new StatementList(s); :}
+			 | stat:s stat_seq:ss               {: RESULT = new StatementList(s,ss); :} ;
+
+stat ::= nonlable_stat:ns                     	{: RESULT = ns; :} ;
+
+nonlable_stat ::= assign:a SEMI                  {: RESULT = a; :}
+				  | cond_stat:cs                {: RESULT = cs; :}
+			      | loop_stat:ls                {: RESULT = ls; :}
+			      | case_stat:cs                {: RESULT = cs; :}
+				  | proc_stat:ps SEMI            {: RESULT = ps; :}
+			      | inout_stat:is SEMI           {: RESULT = is; :}
+			      | new_stat:ns SEMI            {: RESULT = ns; :} ;
+
+new_stat ::= NEW LPAR var:v RPAR                  {: RESULT = new NewStatement(v); :} ;
+
+proc_stat ::= IDE:n LPAR expr_list:el RPAR     	{: RESULT = new ProcedureStatement(el,n); :}
+          | IDE:n LPAR  RPAR              		{: RESULT = new ProcedureStatement(n); :} ;
+
+inout_stat ::= WRITE LPAR expr:e RPAR       		{: RESULT = new WriteVarStatement(e); :}
+			   | WRITE LPAR STRING:s  RPAR    	{: RESULT = new WriteStrStatement(s); :} ;
+           
+expr_list ::= expr:e                      		{: RESULT = new ExprList(e); :}
+			  | expr:e COMMA expr_list:el        	{: RESULT = new ExprList(e,el); :} ;
+
+assign ::= var:v ASSIGN expr:e            		{: RESULT = new Assign(e,v); :} ;
+
+cond_stat ::= IF expr:e THEN stat_seq:ss FI                        {: RESULT = new ConditionalStatement(e,ss); :}
+			  | IF expr:e THEN stat_seq:ss1  ELSE  stat_seq:ss2 FI {: RESULT = new ConditionalStatement(e,ss1,ss2); :} ;
+
+loop_stat ::= WHILE expr:e LC  stat_seq:ss RC                      {: RESULT = new LoopStatement(e,ss); :} ;
+
+case_stat ::= CASE expr:e OF LC case_list:cl RC                    {: RESULT = new CaseStatement(e,cl); :} ;
+
+case_list ::= case:c                       		{: RESULT = new CaseList(c); :}
+			  | case:c case_list:cl             {: RESULT = new CaseList(c,cl); :} ;
+         
+case ::= INTCONST:i COLON stat_seq:ss          	{: RESULT = new Case(ss,i); :} ;
+
+var ::= IDE:n                            		{: RESULT = new IdeType(n); :}
+		| var:v dim_list:dl                   	{: RESULT = new ArrayRef(v,dl); :}
+		| var:v1 DOT var:v2                    	{: RESULT = new RecordRef(v1,v2); :}
+		| var:v PTR                        		{: RESULT = new AddressRef(v); :} ;
+
+dim_list ::= dim:d                    	 		{: RESULT = new DimList(d); :}
+			 | dim:d dim_list:dl              	{: RESULT = new DimList(d,dl); :} ;
+
+dim	::= LPAR_SQ expr:e RPAR_SQ 					{: RESULT = new Dim(e); :} ;
+		
+expr ::= expr:e1 ADD expr:e2                   {: RESULT = new Expr(sym.ADD,e1,e2); :}
+		 | expr:e1 MIN expr:e2                 {: RESULT = new Expr(sym.MIN,e1,e2); :}
+		 | expr:e1 MUL expr:e2                 {: RESULT = new Expr(sym.MUL,e1,e2); :}
+		 | expr:e1 DIV expr:e2                 {: RESULT = new Expr(sym.DIV,e1,e2); :}
+		 | expr:e1 MOD expr:e2                 {: RESULT = new Expr(sym.MOD,e1,e2); :}
+		 | expr:e1 LES expr:e2                 {: RESULT = new Expr(sym.LES,e1,e2); :}
+		 | expr:e1 LEQ expr:e2                 {: RESULT = new Expr(sym.LEQ,e1,e2); :}
+		 | expr:e1 EQU expr:e2                 {: RESULT = new Expr(sym.EQU,e1,e2); :}
+		 | expr:e1 NEQ expr:e2                 {: RESULT = new Expr(sym.NEQ,e1,e2); :}
+		 | expr:e1 GRE expr:e2                 {: RESULT = new Expr(sym.GRE,e1,e2); :}
+		 | expr:e1 GEQ expr:e2                 {: RESULT = new Expr(sym.GEQ,e1,e2); :}
+		 | expr:e1 AND expr:e2                 {: RESULT = new Expr(sym.AND,e1,e2); :}
+		 | expr:e1 OR expr:e2                  {: RESULT = new Expr(sym.OR,e1,e2); :}
+		 | LPAR expr:e RPAR                    {: RESULT = e; :}
+		 | MIN atom:a               		   {: RESULT = new Expr(sym.MIN,a); :} 	%prec UMIN
+		 | NOT atom:a                      	   {: RESULT = new Expr(sym.NOT,a); :}
+		 | atom:a                          	   {: RESULT = a; :}
+		 | proc_stat:ps                        {: RESULT = ps; :} ;
+
+
+atom ::= var:v                        	{: RESULT = v; :}
+		 | INTCONST:i                   {: RESULT = new IntConst(i); :}
+		 | REALCONST:r                  {: RESULT = new RealConst(r); :}
+		 | TRUE                         {: RESULT = new True(); :}
+		 | FALSE                        {: RESULT = new False(); :} ;
