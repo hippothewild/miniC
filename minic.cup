@@ -1,6 +1,7 @@
 package Example;
 
 import java_cup.runtime.*;
+import Nodes.*;
 
 action code {:
 :}
