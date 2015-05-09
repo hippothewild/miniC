@@ -33,9 +33,10 @@ run:
 test:
 	$(JAVA) -classpath $(CLASSPATH) Example.parser < sample.c
 
-cleanup:
+vclean:
 	-rm *~
 	-rm *.class
+	-rm JLex/*.class
 	-rm Yylex.java
 	-rm parser.java
 	-rm sym.java

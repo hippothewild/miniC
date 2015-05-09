@@ -17,4 +17,5 @@ sample.c
 *~
 
 # Compiled class file
-.class
+*.class
+*/*.class
