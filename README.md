@@ -25,7 +25,7 @@ $ make test
 
 To clean up the directory,
 ```
-$ make cleanup
+$ make vclean
 ```
 
 Reference

@@ -20,7 +20,7 @@ build: sym.java parser.java Yylex.java
 	$(JAVAC) Program.java
 	$(JAVAC) sym.java parser.java Yylex.java
 
-all:
+all: init
 	$(JAVA) -classpath $(CLASSPATH) java_cup.Main minic.cup
 	$(JAVA) JLex.Main minic.lex
 	mv minic.lex.java Yylex.java
