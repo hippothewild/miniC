@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class DefaultStmt {
+public class DefaultStmt extends Stmt {
     StmtList stmtList;
     boolean haveBreak = false;
 

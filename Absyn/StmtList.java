@@ -7,10 +7,14 @@ public class StmtList {
 
     public StmtList(Stmt s) {
         stmtList = new ArrayList<Stmt>();
-        stmtList.add(s);
+        if (s != null) {
+            stmtList.add(s);
+        }
     }
 
     public void add(Stmt s) {
-        stmtList.add(s);
+        if (s != null) {
+            stmtList.add(s);
+        }
     }
 }

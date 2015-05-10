@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class ForStmt {
+public class ForStmt extends Stmt {
 	Assign initial;
 	Expr condition;
 	Assign next;

@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class CaseStmt {
+public class CaseStmt extends Stmt {
     int num;
     StmtList stmtList;
     boolean haveBreak = false;

@@ -7,12 +7,12 @@ public class Identifier {
     boolean isArray;
     int size;
 
-    public Identifier(String n, boolean i) {
+    public Identifier(String n) {
         name = n;
         isArray = false;
     }
 
-    public Identifier(String n, boolean i, int s) {
+    public Identifier(String n, int s) {
         name = n;
         isArray = true;
         size = s;

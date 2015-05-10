@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class SwitchStmt {
+public class SwitchStmt extends Stmt {
 	Identifier identifier;
 	CaseList caseList;
 
