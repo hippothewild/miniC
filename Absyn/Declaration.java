@@ -3,6 +3,4 @@ package Absyn;
 import java.util.*;
 import Symbol.Symbol;
 
-public class CallStmt {
-
-}
+abstract public class Declaration extends Absyn {}

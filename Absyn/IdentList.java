@@ -3,6 +3,6 @@ package Absyn;
 import java.util.*;
 import Symbol.Symbol;
 
-public class CallStmt {
-
+public class IdentList {
+	
 }

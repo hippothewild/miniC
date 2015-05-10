@@ -1,4 +1,6 @@
 package Absyn;
+
+import java.util.*;
 import Symbol.Symbol;
 
 public class AssignStmt extends Stmt {

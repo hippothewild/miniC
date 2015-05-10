@@ -7,7 +7,7 @@ public class Print {
   public Print(java.io.PrintStream o) {out=o;}
 
   void indent(int d) {
-      for(int i=0; i<d; i++) 
+      for(int i=0; i<d; i++)
             out.print(' ');
   }
 
@@ -32,7 +32,7 @@ public class Print {
   void prVar(SimpleVar v, int d) {
     say("SimpleVar("); say(v.name.toString()); say(")");
   }
-  
+
   void prVar(FieldVar v, int d) {
     sayln("FieldVar(");
     prVar(v.var, d+1); sayln(",");
@@ -53,10 +53,10 @@ public class Print {
     else if (v instanceof SubscriptVar) prVar((SubscriptVar) v, d);
     else throw new Error("Print.prVar");
   }
-  
+
   void prExp(OpExp e, int d) {
     sayln("OpExp(");
-    indent(d+1); 
+    indent(d+1);
     switch(e.oper) {
     case OpExp.PLUS: say("PLUS"); break;
     case OpExp.MINUS: say("MINUS"); break;
@@ -113,7 +113,7 @@ public class Print {
     prVar(e.var, d+1); sayln(",");
     prExp(e.exp, d+1); say(")");
   }
-  
+
   void prExp(IfExp e, int d) {
     sayln("IfExp(");
     prExp(e.test, d+1); sayln(",");
@@ -132,7 +132,7 @@ public class Print {
   }
 
   void prExp(ForExp e, int d) {
-    sayln("ForExp("); 
+    sayln("ForExp(");
     indent(d+1); prDec(e.var, d+1); sayln(",");
     prExp(e.hi, d+1); sayln(",");
     prExp(e.body, d+1); say(")");
@@ -195,15 +195,15 @@ public class Print {
       indent(i+1); say(d.typ.name.toString());  sayln(",");
     }
     prExp(d.init, i+1); sayln(",");
-    indent(i+1); say(d.escape); say(")"); 
+    indent(i+1); say(d.escape); say(")");
   }
 
   void prDec(TypeDec d, int i) {
     if (d!=null) {
       say("TypeDec("); say(d.name.toString()); sayln(",");
-      prTy(d.ty, i+1); 
+      prTy(d.ty, i+1);
       if (d.next!=null) {
-	say(","); prDec(d.next, i+1); 
+	say(","); prDec(d.next, i+1);
       }
       say(")");
     }
@@ -242,12 +242,12 @@ public class Print {
 
   void prFieldlist(FieldList f, int d) {
     indent(d);
-    say("Fieldlist("); 
+    say("Fieldlist(");
     if (f!=null) {
       sayln("");
       indent(d+1); say(f.name.toString()); sayln("");
       indent(d+1); say(f.typ.toString()); sayln(",");
-      indent(d+1); say(f.escape); 
+      indent(d+1); say(f.escape);
       sayln(",");
       prFieldlist(f.tail, d+1);
     }
@@ -256,10 +256,10 @@ public class Print {
 
   void prExplist(ExpList e, int d) {
     indent(d);
-    say("ExpList("); 
+    say("ExpList(");
     if (e!=null) {
       sayln("");
-      prExp(e.head, d+1); 
+      prExp(e.head, d+1);
       if (e.tail != null) {
 	sayln(","); prExplist(e.tail, d+1);
       }
@@ -269,7 +269,7 @@ public class Print {
 
   void prDecList(DecList v, int d) {
     indent(d);
-    say("DecList("); 
+    say("DecList(");
     if (v!=null) {
       sayln("");
       prDec(v.head, d+1); sayln(",");
@@ -280,7 +280,7 @@ public class Print {
 
   void prFieldExpList(FieldExpList f, int d) {
     indent(d);
-    say("FieldExpList("); 
+    say("FieldExpList(");
     if (f!=null) {
       sayln("");
       say(f.name.toString()); sayln(",");
@@ -290,6 +290,3 @@ public class Print {
     say(")");
   }
 }
-
-
-

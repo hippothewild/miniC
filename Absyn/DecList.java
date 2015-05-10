@@ -1,5 +1,8 @@
 package Absyn;
+
+import java.util.*;
 import Symbol.Symbol;
+
 public class DecList {
    public Dec head;
    public DecList tail;
