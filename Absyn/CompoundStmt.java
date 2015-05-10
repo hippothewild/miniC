@@ -1,11 +1,13 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
 public class CompoundStmt extends Stmt {
-	public DecList decllist;
-	public StmtSeq stmtlist;
-	public CompoundStmt(int p, DecList d, StmtSeq s) {pos=p; decllist=d; stmtlist=s;}
+	public DeclList declList;
+	public StmtList stmtList;
 
+	public CompoundStmt(DeclList d, StmtList s) {
+		declList = d;
+		stmtList = s;
+	}
 }

@@ -1,13 +1,17 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
 public class ForStmt {
-	public AssignStmt init, next;
-	public Exp condition;
-	public Stmt body;
+	Assign initial;
+	Expr condition;
+	Assign next;
+	Stmt body;
 
-	public ForStmt(int p, AssignStmt ini, Exp cond, AssignStmt n, Stmt s)
-	{ pos = p; init = ini; condition =cond; next = n; body = s;}
+	public ForStmt(Assign i, Expr c, Assign n, Stmt b) {
+		initial = i;
+		condition = c;
+		next = n;
+		body = b;
+	}
 }

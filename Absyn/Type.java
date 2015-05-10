@@ -1,8 +1,11 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
 public class Type {
+    TypeName typeName;
 
+    public Type(TypeName t) {
+        typeName = t;
+    }
 }

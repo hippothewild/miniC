@@ -1,8 +1,11 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
 public class CallStmt {
+    Call call;
 
+    public CallStmt(Call c) {
+        call = c;
+    }
 }

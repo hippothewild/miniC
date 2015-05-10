@@ -1,8 +1,16 @@
 package Absyn;
-import Symbol.Symbol;
 
-public class ExpList {
-   public Exp head;
-   public ExpList tail;
-   public ExpList(Exp h, ExpList t) {head=h; tail=t;}
+import java.util.*;
+
+public class ArgList {
+    ArrayList<Expr> argList;
+
+    public ArgList(Expr e) {
+        argList = new ArrayList<Expr>();
+        argList.add(e);
+    }
+
+    public void add(Expr e) {
+        argList.add(e);
+    }
 }

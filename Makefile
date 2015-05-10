@@ -17,14 +17,14 @@ lex: minic.lex
 	mv minic.lex.java Yylex.java
 
 build: sym.java parser.java Yylex.java
-	$(JAVAC) Absyn/*.java
+	$(JAVAC) absyn/*.java
 	$(JAVAC) sym.java parser.java Yylex.java
 
 all: init
 	$(JAVA) -classpath $(CLASSPATH) java_cup.Main minic.cup
 	$(JAVA) JLex.Main minic.lex
 	mv minic.lex.java Yylex.java
-	$(JAVAC) Absyn/*.java
+	$(JAVAC) absyn/*.java
 	$(JAVAC) -d $(CLASSPATH) sym.java parser.java Yylex.java
 
 run:
@@ -35,7 +35,7 @@ test:
 
 vclean:
 	-rm *~
-	-rm Absyn/*.class
+	-rm absyn/*.class
 	-rm *.class
 	-rm JLex/*.class
 	-rm Yylex.java

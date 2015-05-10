@@ -1,10 +1,16 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
 public class FuncList {
-	 public FunctionDec head;
-	 public FuncList tail;
-	 public FuncList(FunctionDec h, FuncList t) {head=h; tail=t;}
+	ArrayList<FunctionDec> funcList;
+
+	public FuncList(FunctionDec f) {
+		funcList = new ArrayList<FunctionDec>();
+		funcList.add(f);
+	}
+
+	public void add(FunctionDec f) {
+		funcList.add(f);
+	}
 }

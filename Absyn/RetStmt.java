@@ -1,8 +1,11 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
 public class RetStmt {
+    Expr expr;
 
+    public RetStmt(Expr e) {
+        expr = e;
+    }
 }

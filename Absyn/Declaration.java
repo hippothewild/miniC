@@ -1,6 +1,13 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
-abstract public class Declaration extends Absyn {}
+public class Declaration {
+    Type type;
+    IdentList identList;
+
+    public Declaration(Type t, IdentList i) {
+        type = t;
+        identList = i;
+    }
+}

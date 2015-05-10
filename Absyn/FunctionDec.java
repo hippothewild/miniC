@@ -1,15 +1,17 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
-public class FunctionDec extends Dec {
-	public int typ;
-	public Symbol name;
-	public FieldList params;
-	public int result;  /* optional */// return type
-	public CompoudStmt body;
+public class FunctionDec {
+	Type type;
+	String name;
+	ParamList params;
+	CompoundStmt body;
 
-	public FunctionDec(int p, Symbol n, FieldList a, int r, CompoundStmt b)
-			       {pos=p; name=n; params=a; result=r; body=b;}
+	public FunctionDec(Type t, String n, ParamList p, CompoundStmt b) {
+		type = t;
+		name = n;
+		params = p;
+		body = b;
+	}
 }

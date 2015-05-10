@@ -70,7 +70,7 @@ non terminal switchStmt;
 
 /* Element of CLOSED statement. */
 non terminal caseList;
-non terminal caseBlock;
+non terminal caseStmt;
 non terminal assign;
 non terminal call;
 
@@ -198,14 +198,14 @@ retStmt ::= TOKEN_RETURN SEMI
 switchStmt ::= TOKEN_SWITCH LPAREN identifier RPAREN LBRACKET caseList RBRACKET
 			 ;
 
-caseList ::= caseBlock
-		   | caseBlock TOKEN_DEFAULT COLON stmtList
-		   | caseBlock TOKEN_DEFAULT COLON stmtList TOKEN_BREAK SEMI
+caseList ::= caseStmt
+		   | caseStmt TOKEN_DEFAULT COLON stmtList
+		   | caseStmt TOKEN_DEFAULT COLON stmtList TOKEN_BREAK SEMI
 		   ;
 
-caseBlock ::=
-			| caseBlock TOKEN_CASE INT_NUM COLON stmtList
-			| caseBlock TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
+caseStmt ::=
+			| caseStmt TOKEN_CASE INT_NUM COLON stmtList
+			| caseStmt TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
 			;
 
 expr ::= MINUS expr

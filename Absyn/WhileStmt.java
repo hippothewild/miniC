@@ -1,8 +1,15 @@
 package Absyn;
 
 import java.util.*;
-import Symbol.Symbol;
 
-public class WhileStmt extends Stmt {
-	public boolean do_while = false;
+public class WhileStmt {
+	Expr expr;
+	Stmt stmt;
+	boolean isDoWhile = false;
+
+	public WhileStmt(Expr e, Stmt s, boolean d) {
+		expr = e;
+		stmt = s;
+		isDoWhile = d;
+	}
 }
