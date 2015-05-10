@@ -4,10 +4,10 @@ import java.util.*;
 
 public class SwitchStmt extends Stmt {
 	Identifier identifier;
-	CaseList caseList;
+	CaseBlock caseBlock;
 
-	public SwitchStmt(Identifier i, CaseList c) {
+	public SwitchStmt(Identifier i, CaseBlock c) {
 		identifier = i;
-		caseList = c;	// Caselist have defaultStmt
+		caseBlock = c;	// CaseBlock have {}(CaseStmt)* (DefaultStmt)}
 	}
 }

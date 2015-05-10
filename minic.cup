@@ -64,8 +64,8 @@ non terminal CallStmt		callStmt;
 non terminal Call			call;
 non terminal RetStmt		retStmt;
 non terminal SwitchStmt		switchStmt;
+non terminal CaseBlock		caseBlock;
 non terminal CaseList		caseList;
-non terminal CaseStmt		caseStmt;
 
 precedence left LPAREN, RPAREN;
 precedence right UNOP;
@@ -270,59 +270,132 @@ closedStmt ::= ifElseClosedStmt:s
 			   :}
 			 ;
 
-ifStmt ::= TOKEN_IF LPAREN expr RPAREN stmt
+ifStmt ::= TOKEN_IF LPAREN expr:c RPAREN stmt:t
+		   {:
+			   RESULT = new IfStmt(c, t);
+		   :}
 		 ;
 
-ifElseOpenStmt ::= TOKEN_IF LPAREN expr RPAREN closedStmt TOKEN_ELSE openStmt
+ifElseOpenStmt ::= TOKEN_IF LPAREN expr:c RPAREN closedStmt:t TOKEN_ELSE openStmt:e
+				   {:
+					   RESULT = new IfStmt(c, t, e);
+				   :}
 				 ;
 
-ifElseClosedStmt ::= TOKEN_IF LPAREN expr RPAREN closedStmt TOKEN_ELSE closedStmt
+ifElseClosedStmt ::= TOKEN_IF LPAREN expr:c RPAREN closedStmt:t TOKEN_ELSE closedStmt:e
+					 {:
+						 RESULT = new IfStmt(c, t, e);
+					 :}
 				   ;
 
-forOpenStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN openStmt
+forOpenStmt ::= TOKEN_FOR LPAREN assign:i SEMI expr:c SEMI assign:n RPAREN openStmt:b
+				{:
+					RESULT = new ForStmt(i, c, n, b);
+				:}
 			  ;
 
-forClosedStmt ::= TOKEN_FOR LPAREN assign SEMI expr SEMI assign RPAREN closedStmt
+forClosedStmt ::= TOKEN_FOR LPAREN assign:i SEMI expr:c SEMI assign:n RPAREN closedStmt:b
+				  {:
+					  RESULT = new ForStmt(i, c, n, b);
+				  :}
 			  ;
 
-whileOpenStmt ::= TOKEN_WHILE LPAREN expr RPAREN openStmt
+whileOpenStmt ::= TOKEN_WHILE LPAREN expr:c RPAREN openStmt:b
+				  {:
+					  RESULT = new WhileStmt(c, b, false);
+				  :}
 				;
 
-whileClosedStmt ::= TOKEN_WHILE LPAREN expr RPAREN closedStmt
+whileClosedStmt ::= TOKEN_WHILE LPAREN expr:c RPAREN closedStmt:b
+					{:
+						RESULT = new WhileStmt(c, b, false);
+					:}
 				;
 
-doWhileStmt ::= TOKEN_DO stmt TOKEN_WHILE LPAREN expr RPAREN SEMI
+doWhileStmt ::= TOKEN_DO stmt:b TOKEN_WHILE LPAREN expr:c RPAREN SEMI
+				{:
+					RESULT = new WhileStmt(c, b, true);
+				:}
 			  ;
 
-assignStmt ::= assign SEMI
+assignStmt ::= assign:a SEMI
+			   {:
+				   RESULT = new AssignStmt(a);
+			   :}
 			 ;
 
-assign ::= ID ASSIGN expr
-		 | ID LSQBRACKET expr RSQBRACKET ASSIGN expr
+assign ::= ID:id ASSIGN expr:e
+		   {:
+			   RESULT = new Assign(id, null, e);
+		   :}
+		 | ID:id LSQBRACKET expr:idx RSQBRACKET ASSIGN expr:e
+		   {:
+			   RESULT = new Assign(id, idx, e);
+		   :}
 		 ;
 
-callStmt ::= call SEMI
+callStmt ::= call:c SEMI
+			 {:
+				 RESULT = new CallStmt(c);
+			 :}
 		   ;
 
-call ::= ID LPAREN RPAREN
-	   | ID LPAREN argList RPAREN
+call ::= ID:id LPAREN RPAREN
+		 {:
+			 RESULT = new Call(id, null);
+		 :}
+	   | ID:id LPAREN argList:args RPAREN
+		 {:
+			 RESULT = new Call(id, args);
+		 :}
        ;
 
 retStmt ::= TOKEN_RETURN SEMI
-		  | TOKEN_RETURN expr SEMI
+			{:
+				RESULT = new RetStmt(null);
+			:}
+		  | TOKEN_RETURN expr:e SEMI
+			{:
+				RESULT = new RetStmt(e);
+			:}
 		  ;
 
-switchStmt ::= TOKEN_SWITCH LPAREN identifier RPAREN LBRACKET caseList RBRACKET
+switchStmt ::= TOKEN_SWITCH LPAREN identifier:i RPAREN LBRACKET caseBlock:c RBRACKET
+			   {:
+				   RESULT = new SwitchStmt(i, c);
+			   :}
 			 ;
 
-caseList ::= caseStmt
-		   | caseStmt TOKEN_DEFAULT COLON stmtList
-		   | caseStmt TOKEN_DEFAULT COLON stmtList TOKEN_BREAK SEMI
+caseBlock ::= caseList:c
+			  {:
+				  RESULT = new CaseBlock(c);
+			  :}
+		   | caseList:c TOKEN_DEFAULT COLON stmtList:s
+			 {:
+				  DefaultStmt ds = new DefaultStmt(s, false);
+				  RESULT = new CaseBlock(c, ds);
+			 :}
+		   | caseList:c TOKEN_DEFAULT COLON stmtList:s TOKEN_BREAK SEMI
+			 {:
+				  DefaultStmt ds = new DefaultStmt(s, false);
+				  RESULT = new CaseBlock(c, ds);
+			 :}
 		   ;
 
-caseStmt ::=
-			| caseStmt TOKEN_CASE INT_NUM COLON stmtList
-			| caseStmt TOKEN_CASE INT_NUM COLON stmtList TOKEN_BREAK SEMI
+caseList ::=
+			  {:
+				  RESULT = new CaseList(null);
+			  :}
+			| caseList:cl TOKEN_CASE INT_NUM:n COLON stmtList:s
+			  {:
+				  CaseStmt cs = new CaseStmt(n, s, false);
+				  cl.add(cs);
+			  :}
+			| caseList:cl TOKEN_CASE INT_NUM:n COLON stmtList:s TOKEN_BREAK SEMI
+			  {:
+				  CaseStmt cs = new CaseStmt(n, s, true);
+				  cl.add(cs);
+			  :}
 			;
 
 expr ::= MINUS expr
@@ -345,6 +418,13 @@ expr ::= MINUS expr
 	   | LPAREN expr RPAREN
 	   ;
 
-argList ::= expr
-		  | argList COMMA expr
+argList ::= expr:e
+			{:
+				RESULT = new ArgList(e);
+			:}
+		  | argList:al COMMA expr:e
+			{:
+				al.add(e);
+				RESULT = al;
+			:}
 		  ;

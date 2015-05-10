@@ -7,10 +7,14 @@ public class DeclList {
 
     public DeclList(Declaration d) {
         declList = new ArrayList<Declaration>();
-        declList.add(d);
+        if (d != null) {
+            declList.add(d);
+        }
     }
 
     public void add(Declaration d) {
-        declList.add(d);
+        if (d != null) {
+            declList.add(d);
+        }
     }
 }
