@@ -398,24 +398,74 @@ caseList ::=
 			  :}
 			;
 
-expr ::= MINUS expr
-		 %prec UNOP
-	   | expr TIMES expr
-	   | expr DIVIDE expr
-	   | expr PLUS expr
-	   | expr MINUS expr
-	   | expr LESS expr
-	   | expr GREATER expr
-	   | expr LESS_EQ expr
-	   | expr GREATER_EQ expr
-	   | expr EQ expr
-	   | expr NOT_EQ expr
-	   | call
-	   | INT_NUM
-	   | FLOAT_NUM
-	   | ID
-	   | ID LSQBRACKET expr RSQBRACKET
-	   | LPAREN expr RPAREN
+expr ::= MINUS expr:e
+		 {:
+			 RESULT = new UnaryExpr(e);
+		 :} %prec UNOP
+	   | expr:lhs TIMES expr:rhs
+		 {:
+			 RESULT = new BinaryExpr(lhs, BinaryOperator.TIMES, rhs);
+		 :}
+	   | expr:lhs DIVIDE expr:rhs
+		 {:
+			 RESULT = new BinaryExpr(lhs, BinaryOperator.DIVIDE, rhs);
+		 :}
+	   | expr:lhs PLUS expr:rhs
+		 {:
+			 RESULT = new BinaryExpr(lhs, BinaryOperator.PLUS, rhs);
+		 :}
+	   | expr:lhs MINUS expr:rhs
+		 {:
+			 RESULT = new BinaryExpr(lhs, BinaryOperator.MINUS, rhs);
+		 :}
+	   | expr:lhs LESS expr:rhs
+		 {:
+			 RESULT = new CompareExpr(lhs, Comparer.LESS, rhs);
+		 :}
+	   | expr:lhs GREATER expr:rhs
+		 {:
+			 RESULT = new CompareExpr(lhs, Comparer.GREATER, rhs);
+		 :}
+	   | expr:lhs LESS_EQ expr:rhs
+		 {:
+			 RESULT = new CompareExpr(lhs, Comparer.LESS_EQ, rhs);
+		 :}
+	   | expr:lhs GREATER_EQ expr:rhs
+		 {:
+			 RESULT = new CompareExpr(lhs, Comparer.GREATER_EQ, rhs);
+		 :}
+	   | expr:lhs EQ expr:rhs
+		 {:
+			 RESULT = new CompareExpr(lhs, Comparer.EQ, rhs);
+		 :}
+	   | expr:lhs NOT_EQ expr:rhs
+		 {:
+			 RESULT = new CompareExpr(lhs, Comparer.NOT_EQ, rhs);
+		 :}
+	   | call:c
+		 {:
+			 RESULT = new CallExpr(c);
+		 :}
+	   | INT_NUM:n
+		 {:
+			 RESULT = new IntExpr(n);
+		 :}
+	   | FLOAT_NUM:n
+		 {:
+			 RESULT = new FloatExpr(n);
+		 :}
+	   | ID:i
+		 {:
+			 RESULT = new IdExpr(i);
+		 :}
+	   | ID:i LSQBRACKET expr:e RSQBRACKET
+		 {:
+			 RESULT = new IdExpr(i, e);
+		 :}
+	   | LPAREN expr:e RPAREN
+		 {:
+			 RESULT = new ParenExpr(e);
+		 :}
 	   ;
 
 argList ::= expr:e

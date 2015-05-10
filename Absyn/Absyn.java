@@ -2,6 +2,6 @@ package Absyn;
 
 import java.util.*;
 
-abstract public class Absyn {
+public class Absyn {
 
 }
