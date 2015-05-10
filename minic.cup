@@ -1,7 +1,7 @@
 package Example;
 
 import java_cup.runtime.*;
-import Nodes.*;
+import Absyn.*;
 
 action code {:
 :}
