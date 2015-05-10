@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class Program {
+public class Program extends Absyn {
     DeclList declList;
     FuncList funcList;
 

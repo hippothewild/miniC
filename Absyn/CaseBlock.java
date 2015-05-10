@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class CaseBlock {
+public class CaseBlock extends Absyn {
     CaseList caseList;
     DefaultStmt defaultStmt = null;
 

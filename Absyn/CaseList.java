@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class CaseList {
+public class CaseList extends Absyn {
     ArrayList<CaseStmt> caseList;
 
     public CaseList(CaseStmt c) {

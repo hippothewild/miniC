@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class FunctionDec {
+public class FunctionDec extends Absyn {
 	Type type;
 	String name;
 	ParamList params;

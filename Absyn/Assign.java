@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class Assign {
+public class Assign extends Absyn {
     String name;
     Expr index, expr;
 

@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class ParamList {
+public class ParamList extends Absyn {
     ArrayList<Param> paramList;
 
     public ParamList(Param p) {

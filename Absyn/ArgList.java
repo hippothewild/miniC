@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class ArgList {
+public class ArgList extends Absyn {
     ArrayList<Expr> argList;
 
     public ArgList(Expr e) {

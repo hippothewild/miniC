@@ -2,6 +2,6 @@ package Absyn;
 
 import java.util.*;
 
-public class Stmt {
+public class Stmt extends Absyn {
 
 }

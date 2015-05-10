@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class FuncList {
+public class FuncList extends Absyn {
 	ArrayList<FunctionDec> funcList;
 
 	public FuncList(FunctionDec f) {

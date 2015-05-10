@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class Declaration {
+public class Declaration extends Absyn {
     Type type;
     IdentList identList;
 

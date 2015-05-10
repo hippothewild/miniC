@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class Param {
+public class Param extends Absyn {
     Type type;
     Identifier identifier;
 

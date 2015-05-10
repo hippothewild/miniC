@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class Call {
+public class Call extends Absyn {
     String name;
     ArgList args;
 

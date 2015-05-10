@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class Identifier {
+public class Identifier extends Absyn {
     String name;
     boolean isArray;
     int size;

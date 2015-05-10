@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class DeclList {
+public class DeclList extends Absyn {
     ArrayList<Declaration> declList;
 
     public DeclList(Declaration d) {

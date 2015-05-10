@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class IdentList {
+public class IdentList extends Absyn {
 	ArrayList<Identifier> identList;
 
 	public IdentList(Identifier i) {

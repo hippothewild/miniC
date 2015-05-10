@@ -2,7 +2,7 @@ package Absyn;
 
 import java.util.*;
 
-public class StmtList {
+public class StmtList extends Absyn {
     ArrayList<Stmt> stmtList;
 
     public StmtList(Stmt s) {

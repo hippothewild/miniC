@@ -1,5 +1,6 @@
 package Example;
 
+import java.io.PrintWriter;
 import java_cup.runtime.*;
 import Absyn.*;
 
@@ -10,6 +11,8 @@ parser code {:
 	public static void main(String args[]) throws Exception {
 		new parser(new Yylex(System.in)).parse();
 	}
+
+
 :}
 
 /* Parenthesis and Brackets. */
@@ -35,6 +38,7 @@ terminal Integer	INT_NUM;
 terminal SEMI, COLON, COMMA;
 
 /* Non-terminal program rules. */
+non terminal Absyn			absyn;
 non terminal Program		program;
 non terminal DeclList		declList;
 non terminal FuncList		funcList;
@@ -78,6 +82,24 @@ precedence right ASSIGN;
 
 
 /* Program grammars. */
+
+absyn ::= program:p
+		  {:
+			  if (Absyn.optionPrintAST) {
+				  // Print out AST at given file name.
+				  Absyn.printWriter = new PrintWriter(Absyn.astOutputName, Absyn.encoding);
+				  p.printAST();
+				  Absyn.printWriter.close();
+			  }
+
+			  if (Absyn.optionPrintSymTable) {
+				  // Print out synmbol table at given file name.
+				  Absyn.printWriter = new PrintWriter(Absyn.symTableOutputName, Absyn.encoding);
+				  p.printSymTable();
+				  Absyn.printWriter.close();
+			  }
+		  :}
+		;
 
 program	::=
 			{:
