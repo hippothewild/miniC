@@ -10,4 +10,13 @@ public class SwitchStmt extends Stmt {
 		identifier = i;
 		caseBlock = c;	// CaseBlock have {}(CaseStmt)* (DefaultStmt)}
 	}
+
+	public void printAST() {
+		printWriter.print("switch (");
+		identifier.printAST();
+		printWriter.println(")");
+		printWriter.println("{");
+		caseBlock.printAST();
+		printWriter.println("}");
+	}
 }

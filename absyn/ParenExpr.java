@@ -8,4 +8,10 @@ public class ParenExpr extends Expr {
     public ParenExpr(Expr e) {
         expr = e;
     }
+
+    public void printAST() {
+        printWriter.print("(");
+        expr.printAST();
+        printWriter.print(")");
+    }
 }

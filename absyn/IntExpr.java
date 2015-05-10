@@ -8,4 +8,8 @@ public class IntExpr extends Expr {
     public IntExpr(int n) {
         num = n;
     }
+
+    public void printAST() {
+        printWriter.print(num);
+    }
 }

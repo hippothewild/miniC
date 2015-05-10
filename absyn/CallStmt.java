@@ -8,4 +8,9 @@ public class CallStmt extends Stmt {
     public CallStmt(Call c) {
         call = c;
     }
+
+    public void printAST() {
+        call.printAST();
+        printWriter.println(";");
+    }
 }

@@ -17,4 +17,13 @@ public class IdExpr extends Expr {
         index = i;
         isArray = true;
     }
+
+    public void printAST() {
+        printWriter.print(name);
+        if (isArray) {
+            printWriter.printf("[");
+            index.printAST();
+            printWriter.printf("]");
+        }
+    }
 }

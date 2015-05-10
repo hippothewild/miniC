@@ -12,4 +12,23 @@ public class BinaryExpr extends Expr {
         binOp = b;
         rhs = r;
     }
+
+    public void printAST() {
+        lhs.printAST();
+        switch (binOp) {
+        case PLUS:
+            printWriter.print("+");
+            break;
+        case MINUS:
+            printWriter.print("-");
+            break;
+        case DIVIDE:
+            printWriter.print("/");
+            break;
+        case TIMES:
+            printWriter.print("*");
+            break;
+        }
+        rhs.printAST();
+    }
 }

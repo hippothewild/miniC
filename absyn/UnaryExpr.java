@@ -9,4 +9,9 @@ public class UnaryExpr extends Expr {
     public UnaryExpr(Expr e) {
         expr = e;
     }
+
+    public void printAST() {
+        printWriter.print("-");
+        expr.printAST();
+    }
 }

@@ -14,4 +14,16 @@ public class ForStmt extends Stmt {
 		next = n;
 		body = b;
 	}
+
+	public void printAST() {
+		printWriter.print("for (");
+		initial.printAST();
+		printWriter.print("; ");
+		condition.printAST();
+		printWriter.print("; ");
+		next.printAST();
+		printWriter.println(")");
+
+		body.printAST();
+	}
 }

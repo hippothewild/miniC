@@ -13,4 +13,10 @@ public class FuncList extends Absyn {
 	public void add(FunctionDec f) {
 		funcList.add(f);
 	}
+
+	public void printAST() {
+        for (FunctionDec f : funcList) {
+            f.printAST();
+        }
+    }
 }

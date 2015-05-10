@@ -8,4 +8,9 @@ public class AssignStmt extends Stmt {
     public AssignStmt(Assign a) {
         assign = a;
     }
+
+    public void printAST() {
+        assign.printAST();
+        printWriter.println(";");
+    }
 }

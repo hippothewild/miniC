@@ -17,4 +17,11 @@ public class Identifier extends Absyn {
         isArray = true;
         size = s;
     }
+
+    public void printAST() {
+        printWriter.print(name);
+        if (isArray) {
+            printWriter.printf("[%d]", size);
+        }
+    }
 }

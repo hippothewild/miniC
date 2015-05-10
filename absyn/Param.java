@@ -10,4 +10,10 @@ public class Param extends Absyn {
         type = t;
         identifier = i;
     }
+
+    public void printAST() {
+        type.printAST();
+        printWriter.print(" ");
+        identifier.printAST();
+    }
 }

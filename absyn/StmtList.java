@@ -17,4 +17,10 @@ public class StmtList extends Absyn {
             stmtList.add(s);
         }
     }
+
+    public void printAST() {
+        for (Stmt s : stmtList) {
+            s.printAST();
+        }
+    }
 }

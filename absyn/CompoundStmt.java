@@ -10,4 +10,15 @@ public class CompoundStmt extends Stmt {
 		declList = d;
 		stmtList = s;
 	}
+
+	public void printAST() {
+        printWriter.println("{");
+		if (declList != null) {
+			declList.printAST();
+		}
+		if (stmtList != null) {
+			stmtList.printAST();
+		}
+		printWriter.println("}");
+    }
 }

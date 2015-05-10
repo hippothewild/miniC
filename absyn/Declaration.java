@@ -10,4 +10,11 @@ public class Declaration extends Absyn {
         type = t;
         identList = i;
     }
+
+    public void printAST() {
+        type.printAST();
+        printWriter.print(" ");
+        identList.printAST();
+        printWriter.println(";");
+    }
 }

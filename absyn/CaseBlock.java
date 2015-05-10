@@ -14,4 +14,12 @@ public class CaseBlock extends Absyn {
 		caseList = c;
         defaultStmt = d;
 	}
+
+    public void printAST() {
+		caseList.printAST();
+        if (defaultStmt != null) {
+            printWriter.println("default:");
+            defaultStmt.printAST();
+        }
+	}
 }

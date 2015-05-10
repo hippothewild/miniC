@@ -12,4 +12,29 @@ public class CompareExpr extends Expr {
         comp = c;
         rhs = r;
     }
+
+    public void printAST() {
+        lhs.printAST();
+        switch (comp) {
+        case LESS:
+            printWriter.print("<");
+            break;
+        case GREATER:
+            printWriter.print(">");
+            break;
+        case LESS_EQ:
+            printWriter.print("<=");
+            break;
+        case GREATER_EQ:
+            printWriter.print(">=");
+            break;
+        case EQ:
+            printWriter.print("==");
+            break;
+        case NOT_EQ:
+            printWriter.print("!=");
+            break;
+        }
+        rhs.printAST();
+    }
 }

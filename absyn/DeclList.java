@@ -13,8 +13,12 @@ public class DeclList extends Absyn {
     }
 
     public void add(Declaration d) {
-        if (d != null) {
-            declList.add(d);
+        declList.add(d);
+    }
+
+    public void printAST() {
+        for (Declaration d : declList) {
+            d.printAST();
         }
     }
 }

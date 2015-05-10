@@ -19,3 +19,6 @@ sample.c
 # Compiled class file
 *.class
 */*.class
+
+# Generated output
+*.out

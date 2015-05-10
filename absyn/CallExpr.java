@@ -8,4 +8,8 @@ public class CallExpr extends Expr {
     public CallExpr(Call c) {
         call = c;
     }
+
+    public void printAST() {
+        call.printAST();
+    }
 }

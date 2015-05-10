@@ -18,4 +18,15 @@ public class IfStmt extends Stmt {
 		thenStmt = t;
 		elseStmt = e;
 	}
+
+	public void printAST() {
+		printWriter.print("if (");
+		condition.printAST();
+		printWriter.println(")");
+		thenStmt.printAST();
+		if (elseStmt != null) {
+			printWriter.println("else");
+			elseStmt.printAST();
+		}
+	}
 }

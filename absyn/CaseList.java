@@ -17,4 +17,10 @@ public class CaseList extends Absyn {
             caseList.add(c);
         }
     }
+
+    public void printAST() {
+        for (CaseStmt c : caseList) {
+            c.printAST();
+        }
+    }
 }
