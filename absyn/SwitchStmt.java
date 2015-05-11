@@ -19,4 +19,22 @@ public class SwitchStmt extends Stmt {
 		caseBlock.printAST();
 		printWriter.println("}");
 	}
+
+	public void printSymTable() {
+		// Step one depth;
+		// Retrack scope and symbol list inside the scope based on DFS logic.
+		int tempScopeCount = scopeCount+1;
+		int tempSymbolCount = symbolCount;
+		scopeStack.add("switch(" + tempScopeCount + ")");
+		scopeCount = 0;
+		symbolCount = 0;
+
+		printSymTableHeader();
+		caseBlock.printSymTable();
+
+		// Recover current scope's scope count and symbol count.
+		symbolCount = tempSymbolCount;
+		scopeCount = tempScopeCount;
+		scopeStack.remove(scopeStack.size() - 1);
+	}
 }

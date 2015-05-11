@@ -29,4 +29,39 @@ public class IfStmt extends Stmt {
 			elseStmt.printAST();
 		}
 	}
+
+	public void printSymTable() {
+		// Step one depth;
+		// Retrack scope and symbol list inside the scope based on DFS logic.
+		int tempScopeCount = scopeCount+1;
+		int tempSymbolCount = symbolCount;
+		scopeStack.add("if(" + tempScopeCount + ")");
+		scopeCount = 0;
+		symbolCount = 0;
+
+		printSymTableHeader();
+		thenStmt.printSymTable();
+
+		// Recover current scope's scope count and symbol count.
+		symbolCount = tempSymbolCount;
+		scopeCount = tempScopeCount;
+		scopeStack.remove(scopeStack.size() - 1);
+
+		if (elseStmt != null) {
+			// Else statement also counts one depth.
+			tempScopeCount = scopeCount+1;
+			tempSymbolCount = symbolCount;
+			scopeStack.add("else(" + tempScopeCount + ")");
+			scopeCount = 0;
+			symbolCount = 0;
+
+			printSymTableHeader();
+			elseStmt.printSymTable();
+
+			// Recover current scope's scope count and symbol count.
+			symbolCount = tempSymbolCount;
+			scopeCount = tempScopeCount;
+			scopeStack.remove(scopeStack.size() - 1);
+		}
+	}
 }

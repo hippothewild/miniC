@@ -25,22 +25,22 @@ public class Absyn {
             // More scope name than GLOBAL context.
             scopeNamePtr = 1;
         }
+        printWriter.print("Function name : " + scopeStack.get(scopeNamePtr++));
 
-        printWriter.print("Function name : " + scopeStack.get(scopeNamePtr));
         for(; scopeNamePtr < scopeStack.size(); scopeNamePtr++) {
-            printWriter.println(" - " + scopeStack.get(scopeNamePtr));
+            printWriter.print(" - " + scopeStack.get(scopeNamePtr));
         }
-        printWriter.printf("\n%8s%8s%24s%8s%12s\n", "Count", "Type", "Name", "Array", "Role");
+        printWriter.printf("\n%8s%8s%16s%8s%12s\n", "Count", "Type", "Name", "Array", "Role");
     }
 
     static public void printSymTableRow(String type, String name, int arrayLen, String role) {
 
         if (arrayLen == 0) {
             // Non-array
-            printWriter.printf("%8d%8s%24s%8s%12s\n", symbolCount++, type, name, "", role);
+            printWriter.printf("%8d%8s%16s%8s%12s\n", ++symbolCount, type, name, "", role);
         } else {
             // Array
-            printWriter.printf("%8d%8s%24s%8d%12s\n", symbolCount++, type, name, arrayLen, role);
+            printWriter.printf("%8d%8s%16s%8d%12s\n", ++symbolCount, type, name, arrayLen, role);
         }
     }
 

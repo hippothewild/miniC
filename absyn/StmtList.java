@@ -26,7 +26,27 @@ public class StmtList extends Absyn {
 
     public void printSymTable() {
         for (Stmt s : stmtList) {
-            s.printSymTable();
+            // Don't handle scope depth step in CompoundStmt itself.
+            // CompoundStmt used in function, loop, etc... should not be counted as scope depth.
+            if (s.getClass().equals(CompoundStmt.class)) {
+                // Step one depth;
+        		// Retrack scope and symbol list inside the scope based on DFS logic.
+        		int tempScopeCount = scopeCount+1;
+        		int tempSymbolCount = symbolCount;
+        		scopeStack.add("compound(" + tempScopeCount + ")");
+        		scopeCount = 0;
+        		symbolCount = 0;
+
+        		printSymTableHeader();
+        		s.printSymTable();
+
+        		// Recover current scope's scope count and symbol count.
+        		symbolCount = tempSymbolCount;
+        		scopeCount = tempScopeCount;
+        		scopeStack.remove(scopeStack.size() - 1);
+            } else {
+                s.printSymTable();
+            }
         }
     }
 }

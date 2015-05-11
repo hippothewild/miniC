@@ -21,6 +21,7 @@ public class Program extends Absyn {
     }
 
     public void printSymTable() {
+        printSymTableHeader();
         if (declList != null) {
             declList.printSymTable();
         }

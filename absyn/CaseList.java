@@ -23,4 +23,10 @@ public class CaseList extends Absyn {
             c.printAST();
         }
     }
+
+    public void printSymTable() {
+        for (CaseStmt c : caseList) {
+            c.printSymTable();
+        }
+    }
 }

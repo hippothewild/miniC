@@ -16,10 +16,21 @@ public class CaseBlock extends Absyn {
 	}
 
     public void printAST() {
-		caseList.printAST();
+		if (caseList != null) {
+            caseList.printAST();
+        }
         if (defaultStmt != null) {
             printWriter.println("default:");
             defaultStmt.printAST();
+        }
+	}
+
+    public void printSymTable() {
+        if (caseList != null) {
+            caseList.printSymTable();
+        }
+        if (defaultStmt != null) {
+            defaultStmt.printSymTable();
         }
 	}
 }
