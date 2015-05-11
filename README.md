@@ -28,9 +28,24 @@ To clean up the directory,
 $ make vclean
 ```
 
+AST & Symbol Table Results
+-------
+When you run the parser by `make run` or `make test`, it will print out AST generation and symbol table as two binary files:  
+```
+  SYMBOL TABLE : sym_table.out
+AST GENERATION : ast.out
+```
+You can configure your own output settings in `absyn/Absyn.java`. Default setting is:
+```java
+static public boolean optionPrintAST      = true;
+static public String  astOutputName       = "ast.out";
+static public boolean optionPrintSymTable = true;
+static public String  symTableOutputName  = "sym_table.out";
+static public String  encoding            = "UTF-8";
+```
+
 Reference
 -------
-###### Project 01
 Manual of CUP(in Korean): https://wiki.kldp.org/wiki.php/CUPManual  
 Skeleton code with Java-CUP and JLex: https://github.com/gmh33/Java-CUP-jLex-Example  
 Resolving Dangling-else Problem: http://www.parsifalsoft.com/ifelse.html  
@@ -39,4 +54,4 @@ Copyright
 -------
 Jihwan Chun  
 <jihwan0321@kaist.ac.kr>  
-Last update Apr-15-2015  
+Last update May-11-2015
