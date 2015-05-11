@@ -35,13 +35,13 @@ test:
 
 vclean:
 	-rm *~
-	-rm absyn/*.class
+	-rm *.out
 	-rm *.class
-	-rm JLex/*.class
+	-rm absyn/*.class
+	-rm java_cup/*.class
+	-rm Example/*.class
 	-rm Yylex.java
 	-rm parser.java
 	-rm sym.java
-	-rm java_cup/*.class
 	-rm java_cup/runtime/*.class
-	-rm Example/*.class
 	-rm -r Example/

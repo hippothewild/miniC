@@ -7,11 +7,15 @@ public class ArgList extends Absyn {
 
     public ArgList(Expr e) {
         argList = new ArrayList<Expr>();
-        argList.add(e);
+        if(e != null) {
+            argList.add(e);
+        }
     }
 
     public void add(Expr e) {
-        argList.add(e);
+        if(e != null) {
+            argList.add(e);
+        }
     }
 
     public void printAST() {

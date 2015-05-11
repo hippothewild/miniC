@@ -7,11 +7,15 @@ public class ParamList extends Absyn {
 
     public ParamList(Param p) {
         paramList = new ArrayList<Param>();
-        paramList.add(p);
+        if (p != null) {
+            paramList.add(p);
+        }
     }
 
     public void add(Param p) {
-        paramList.add(p);
+        if (p != null) {
+            paramList.add(p);
+        }
     }
 
     public void printAST() {

@@ -26,6 +26,8 @@ public class CompoundStmt extends Stmt {
 		if (declList != null) {
 			declList.printSymTable();
 		}
-		stmtList.printSymTable();
+		if (stmtList != null) {
+			stmtList.printSymTable();
+		}
 	}
 }

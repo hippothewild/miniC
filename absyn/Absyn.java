@@ -12,7 +12,7 @@ public class Absyn {
     static public String  encoding            = "UTF-8";
 
     // Writer object.
-    static public PrintWriter printWriter;
+    static public PrintWriter printWriter = null;
 
     // Symbol table assisting variables and functions.
     static public int scopeCount = 0;

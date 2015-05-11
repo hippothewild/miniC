@@ -7,11 +7,15 @@ public class IdentList extends Absyn {
 
 	public IdentList(Identifier i) {
 		identList = new ArrayList<Identifier>();
-		identList.add(i);
+		if (i != null) {
+			identList.add(i);
+		}
 	}
 
 	public void add(Identifier i) {
-		identList.add(i);
+		if (i != null) {
+			identList.add(i);
+		}
 	}
 
 	public void printAST() {

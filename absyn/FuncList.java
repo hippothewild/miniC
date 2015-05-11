@@ -7,11 +7,15 @@ public class FuncList extends Absyn {
 
 	public FuncList(FunctionDec f) {
 		funcList = new ArrayList<FunctionDec>();
-		funcList.add(f);
+		if (f != null) {
+			funcList.add(f);
+		}
 	}
 
 	public void add(FunctionDec f) {
-		funcList.add(f);
+		if (f != null) {
+			funcList.add(f);
+		}
 	}
 
 	public void printAST() {
