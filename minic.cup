@@ -398,7 +398,7 @@ caseBlock ::= caseList:c
 			 :}
 		   | caseList:c TOKEN_DEFAULT COLON stmtList:s TOKEN_BREAK SEMI
 			 {:
-				  DefaultStmt ds = new DefaultStmt(s, false);
+				  DefaultStmt ds = new DefaultStmt(s, true);
 				  RESULT = new CaseBlock(c, ds);
 			 :}
 		   ;
@@ -411,11 +411,13 @@ caseList ::=
 			  {:
 				  CaseStmt cs = new CaseStmt(n, s, false);
 				  cl.add(cs);
+				  RESULT = cl;
 			  :}
 			| caseList:cl TOKEN_CASE INT_NUM:n COLON stmtList:s TOKEN_BREAK SEMI
 			  {:
 				  CaseStmt cs = new CaseStmt(n, s, true);
 				  cl.add(cs);
+				  RESULT = cl;
 			  :}
 			;
 
