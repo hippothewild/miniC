@@ -37,7 +37,7 @@ public class ParamList extends Absyn {
                     typeStr = "float";
                     break;
             }
-            printSymTableRow(typeStr, p.identifier.name, p.identifier.size, "variable");
+            printSymTableRow(typeStr, p.identifier.name, p.identifier.size, "parameter");
         }
     }
 }
