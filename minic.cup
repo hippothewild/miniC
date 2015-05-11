@@ -11,8 +11,6 @@ parser code {:
 	public static void main(String args[]) throws Exception {
 		new parser(new Yylex(System.in)).parse();
 	}
-
-
 :}
 
 /* Parenthesis and Brackets. */
@@ -95,6 +93,7 @@ absyn ::= program:p
 			  if (Absyn.optionPrintSymTable) {
 				  // Print out synmbol table at given file name.
 				  Absyn.printWriter = new PrintWriter(Absyn.symTableOutputName, Absyn.encoding);
+				  Absyn.scopeStack.add("GLOBAL");
 				  p.printSymTable();
 				  Absyn.printWriter.close();
 			  }

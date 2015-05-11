@@ -23,4 +23,10 @@ public class StmtList extends Absyn {
             s.printAST();
         }
     }
+
+    public void printSymTable() {
+        for (Stmt s : stmtList) {
+            s.printSymTable();
+        }
+    }
 }

@@ -4,23 +4,21 @@ import java.util.*;
 
 public class Identifier extends Absyn {
     String name;
-    boolean isArray;
     int size;
 
     public Identifier(String n) {
         name = n;
-        isArray = false;
+        size = 0;
     }
 
     public Identifier(String n, int s) {
         name = n;
-        isArray = true;
         size = s;
     }
 
     public void printAST() {
         printWriter.print(name);
-        if (isArray) {
+        if (size > 0) {
             printWriter.printf("[%d]", size);
         }
     }

@@ -19,4 +19,10 @@ public class FuncList extends Absyn {
             f.printAST();
         }
     }
+
+	public void printSymTable() {
+        for (FunctionDec f : funcList) {
+            f.printSymTable();
+        }
+    }
 }

@@ -17,4 +17,20 @@ public class Declaration extends Absyn {
         identList.printAST();
         printWriter.println(";");
     }
+
+    public void printSymTable() {
+        // Symbol got : count symbolCnt or each declaration and print it.
+        String typeStr = "NULL";
+        switch (type.typeName) {
+            case INT:
+                typeStr = "int";
+                break;
+            case FLOAT:
+                typeStr = "float";
+                break;
+        }
+        for (Identifier i : identList.identList) {
+            printSymTableRow(typeStr, i.name, i.size, "variable");
+        }
+    }
 }

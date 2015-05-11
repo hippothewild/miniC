@@ -21,4 +21,10 @@ public class DeclList extends Absyn {
             d.printAST();
         }
     }
+
+    public void printSymTable() {
+        for (Declaration d : declList) {
+            d.printSymTable();
+        }
+    }
 }

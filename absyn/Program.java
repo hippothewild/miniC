@@ -19,4 +19,13 @@ public class Program extends Absyn {
             funcList.printAST();
         }
     }
+
+    public void printSymTable() {
+        if (declList != null) {
+            declList.printSymTable();
+        }
+        if (funcList != null) {
+            funcList.printSymTable();
+        }
+    }
 }

@@ -21,4 +21,19 @@ public class ParamList extends Absyn {
         }
         paramList.get(paramList.size() - 1).printAST();
     }
+
+    public void printSymTable() {
+        for (Param p : paramList) {
+            String typeStr = "NULL";
+            switch (p.type.typeName) {
+                case INT:
+                    typeStr = "int";
+                    break;
+                case FLOAT:
+                    typeStr = "float";
+                    break;
+            }
+            printSymTableRow(typeStr, p.identifier.name, p.identifier.size, "variable");
+        }
+    }
 }
