@@ -44,6 +44,11 @@ static public String  symTableOutputName  = "sym_table.out";
 static public String  encoding            = "UTF-8";
 ```
 
+Semantic Analysis
+-------
+The compiler will do semantic analysis on given input and raise appropriate compile error when needed.  
+List of semantic analysis checklist :
+
 Reference
 -------
 Manual of CUP(in Korean): https://wiki.kldp.org/wiki.php/CUPManual  
@@ -54,4 +59,4 @@ Copyright
 -------
 Jihwan Chun  
 <jihwan0321@kaist.ac.kr>  
-Last update May-11-2015
+Last update May-27-2015
