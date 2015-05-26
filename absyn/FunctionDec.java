@@ -47,6 +47,13 @@ public class FunctionDec extends Absyn {
     }
 
 	public FunctionDec semanticAnalysis() {
+		// Check if function name is declared by another function or variable.
+		if (getFunctionScope(this.name) != null) {
+			raiseError(SEMANTIC_ERR, "Function name " + this.name + " is already declared by another function.");
+		} else if (getSymbolFromSymbolTable(this.name) != null) {
+			raiseError(SEMANTIC_ERR, "Function name " + this.name + " is already declared by another variable.");
+		}
+
 		// Scope-in one step. (function)
 		pushSymbolScope(this.name);
 		pushFunctionScope(this.type, this.name);
@@ -59,7 +66,6 @@ public class FunctionDec extends Absyn {
 
 		// Scope-out one step.
 		popSymbolScope();
-		popFunctionScope();
 		return f;
 	}
 }

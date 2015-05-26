@@ -17,4 +17,8 @@ public class SymbolScope {
         Symbol symbol = new Symbol(type, length, RoleName.VARIABLE);
         symbolMap.put(symbolName, symbol);
     }
+
+    public boolean contains(String symbolName) {
+        return this.symbolMap.containsKey(symbolName);
+    }
 }

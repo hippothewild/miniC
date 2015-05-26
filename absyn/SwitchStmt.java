@@ -39,6 +39,11 @@ public class SwitchStmt extends Stmt {
 	}
 
 	public SwitchStmt semanticAnalysis() {
+		Symbol sym = getSymbolFromSymbolTable(this.identifier.name);
+        if (sym == null) {
+            raiseError(SEMANTIC_ERR, "Variable " + this.identifier.name + " is not declared.");
+        }
+
 		SwitchStmt ss = new SwitchStmt(null, null);
 		ss.identifier = this.identifier.semanticAnalysis();
 		ss.caseBlock = this.caseBlock.semanticAnalysis();

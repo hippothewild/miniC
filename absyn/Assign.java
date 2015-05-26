@@ -24,6 +24,17 @@ public class Assign extends Absyn {
     }
 
     public Assign semanticAnalysis() {
+        // Do semantic check for given assign.
+        Symbol sym = getSymbolFromSymbolTable(this.name);
+        if (sym == null) {
+            raiseError(SEMANTIC_ERR, "Variable " + this.name + " is not declared.");
+        }
+        if (this.index != null) {
+            if (sym.length == 0) {
+                raiseError(SEMANTIC_ERR, "Referenced index of non-array variable " + this.name + ".");
+            }
+        }
+
         Assign a = new Assign(name, null, null);
         if (index != null) {
             a.index = this.index.semanticAnalysis();

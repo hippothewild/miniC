@@ -21,6 +21,11 @@ public class Call extends Absyn {
     }
 
     public Call semanticAnalysis() {
+        FunctionScope fs = getFunctionScope(this.name);
+        if (fs == null) {
+            raiseError(SEMANTIC_ERR, "Function " + this.name + " is not declared.");
+        }
+
         Call c = new Call(this.name, null);
         c.args = this.args.semanticAnalysis();
         return c;

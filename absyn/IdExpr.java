@@ -28,8 +28,25 @@ public class IdExpr extends Expr {
     }
 
     public IdExpr semanticAnalysis() {
+        // Do semantic check for given identifier.
+        Symbol sym = getSymbolFromSymbolTable(this.name);
+        if (sym == null) {
+            sym = getSymbolFromFunctionTable(getCurrentFunctionScope().scopeName, this.name);
+        }
+        if (sym == null) {
+            raiseError(SEMANTIC_ERR, "Variable " + this.name + " is not declared.");
+        }
+        if (this.isArray) {
+            if (sym.length == 0) {
+                raiseError(SEMANTIC_ERR, "Referenced index of non-array variable " + this.name + ".");
+            }
+        }
+
         IdExpr i = new IdExpr(this.name);
-        i.index = this.index.semanticAnalysis();
+        if (this.isArray) {
+            i.index = this.index.semanticAnalysis();
+            i.isArray = true;
+        }
         return i;
     }
 }

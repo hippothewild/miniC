@@ -15,6 +15,13 @@ public class Absyn {
     // Writer object.
     static public PrintWriter printWriter = null;
 
+    // Error raising function.
+    static final String SEMANTIC_ERR = "Semantic error";
+    static final String TYPE_ERR = "Type error";
+    static public void raiseError(String errType, String msg) {
+        System.err.println(errType + " : " + msg);
+        System.exit(0);
+    }
 
     // Symbol table assisting variables and functions.
     static public int scopeCount = 0;
@@ -86,5 +93,35 @@ public class Absyn {
     }
     static public void popFunctionScope() {
         functionTable.remove(functionTable.size()-1);
+    }
+
+    // [Semantic Analysis] Check existence of identifier name in the scope stack.
+    static public Symbol getSymbolFromSymbolTable(String name) {
+        for (int j = symbolTable.size()-1; j >= 0; j--) {
+            if (symbolTable.get(j).contains(name)) {
+                return symbolTable.get(j).symbolMap.get(name);
+            }
+        }
+        return null;
+    }
+
+    static public Symbol getSymbolFromFunctionTable(String functionName, String name) {
+        FunctionScope func = getFunctionScope(functionName);
+
+        if (func != null) {
+            if (func.contains(name)) {
+                return func.symbolMap.get(name);
+            }
+        }
+        return null;
+    }
+
+    static public FunctionScope getFunctionScope(String functionName) {
+        for (FunctionScope func : functionTable) {
+            if (functionName.equals(func.scopeName)) {
+                return func;
+            }
+        }
+        return null;
     }
 }

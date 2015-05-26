@@ -48,6 +48,9 @@ Semantic Analysis
 -------
 The compiler will do semantic analysis on given input and raise appropriate compile error when needed.  
 List of semantic analysis checklist :
+- (Scope Check) Are all identifiers used after declared in correct scope?
+- (Scope Check) Are all array identifiers and single identifiers are correctly referenced?
+- (Scope Check) Are all functions and identifiers declared only once?
 
 Reference
 -------
