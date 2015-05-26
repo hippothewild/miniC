@@ -11,8 +11,10 @@ public class Absyn {
     static public String  symTableOutputName  = "sym_table.out";
     static public String  encoding            = "UTF-8";
 
+
     // Writer object.
     static public PrintWriter printWriter = null;
+
 
     // Symbol table assisting variables and functions.
     static public int scopeCount = 0;
@@ -51,5 +53,38 @@ public class Absyn {
 
     public void printSymTable() {
         // Will be extended by each node
+    }
+
+
+    // Stack of scope for semantic analysis.
+    static private ArrayList<SymbolScope> symbolTable = new ArrayList<SymbolScope>();
+    static private ArrayList<FunctionScope> functionTable = new ArrayList<FunctionScope>();
+    static final String GLOBAL = "GLOBAL";
+    static final String COMPOUND = "COMPOUND";
+
+    static public void pushSymbolScope(String scopeName) {
+        symbolTable.add(new SymbolScope(scopeName));
+    }
+    static public SymbolScope getCurrentSymbolScope() {
+        if (symbolTable.size() >= 1) {
+            return symbolTable.get(symbolTable.size()-1);
+        }
+        return null;
+    }
+    static public void popSymbolScope() {
+        symbolTable.remove(symbolTable.size()-1);
+    }
+
+    static public void pushFunctionScope(Type type, String scopeName) {
+        functionTable.add(new FunctionScope(type, scopeName));
+    }
+    static public FunctionScope getCurrentFunctionScope() {
+        if (functionTable.size() >= 1) {
+            return functionTable.get(functionTable.size()-1);
+        }
+        return null;
+    }
+    static public void popFunctionScope() {
+        functionTable.remove(functionTable.size()-1);
     }
 }

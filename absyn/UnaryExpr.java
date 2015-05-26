@@ -14,4 +14,10 @@ public class UnaryExpr extends Expr {
         printWriter.print("-");
         expr.printAST();
     }
+
+    public UnaryExpr semanticAnalysis() {
+        UnaryExpr u = new UnaryExpr(null);
+        u.expr = this.expr.semanticAnalysis();
+        return u;
+    }
 }

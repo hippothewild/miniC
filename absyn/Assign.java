@@ -22,4 +22,13 @@ public class Assign extends Absyn {
         printWriter.write("=");
         expr.printAST();
     }
+
+    public Assign semanticAnalysis() {
+        Assign a = new Assign(name, null, null);
+        if (index != null) {
+            a.index = this.index.semanticAnalysis();
+        }
+        a.expr = this.expr.semanticAnalysis();
+        return a;
+    }
 }

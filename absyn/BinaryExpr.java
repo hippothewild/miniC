@@ -31,4 +31,11 @@ public class BinaryExpr extends Expr {
         }
         rhs.printAST();
     }
+
+    public BinaryExpr semanticAnalysis() {
+        BinaryExpr b = new BinaryExpr(null, binOp, null);
+        b.lhs = this.lhs.semanticAnalysis();
+        b.rhs = this.rhs.semanticAnalysis();
+        return b;
+    }
 }

@@ -25,4 +25,12 @@ public class IdentList extends Absyn {
         }
 		identList.get(identList.size() - 1).printAST();
     }
+
+	public IdentList semanticAnalysis()	{
+		IdentList il = new IdentList(null);
+		for (Identifier i : this.identList) {
+			il.add(i.semanticAnalysis());
+		}
+		return il;
+	}
 }

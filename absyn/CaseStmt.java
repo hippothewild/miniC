@@ -38,4 +38,10 @@ public class CaseStmt extends Stmt {
 		scopeCount = tempScopeCount;
 		scopeStack.remove(scopeStack.size() - 1);
 	}
+
+    public CaseStmt semanticAnalysis() {
+        CaseStmt c = new CaseStmt(this.num, null, this.hasBreak);
+        c.stmtList = this.stmtList.semanticAnalysis();
+        return c;
+    }
 }

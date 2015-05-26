@@ -19,4 +19,8 @@ public class Type extends Absyn {
                 break;
         }
     }
+
+    public Type semanticAnalysis() {
+        return this;
+    }
 }

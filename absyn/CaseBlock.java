@@ -33,4 +33,13 @@ public class CaseBlock extends Absyn {
             defaultStmt.printSymTable();
         }
 	}
+
+    public CaseBlock semanticAnalysis() {
+        CaseBlock c = new CaseBlock(null);
+        c.caseList = this.caseList.semanticAnalysis();
+        if (this.defaultStmt != null) {
+            c.defaultStmt = this.defaultStmt.semanticAnalysis();
+        }
+        return c;
+    }
 }

@@ -64,4 +64,14 @@ public class IfStmt extends Stmt {
 			scopeStack.remove(scopeStack.size() - 1);
 		}
 	}
+
+	public IfStmt semanticAnalysis() {
+		IfStmt i = new IfStmt(null, null, null);
+		i.condition = this.condition.semanticAnalysis();
+		i.thenStmt = this.thenStmt.semanticAnalysis();
+		if (this.elseStmt != null) {
+			i.elseStmt = this.elseStmt.semanticAnalysis();
+		}
+		return i;
+	}
 }

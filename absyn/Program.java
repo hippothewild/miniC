@@ -29,4 +29,21 @@ public class Program extends Absyn {
             funcList.printSymTable();
         }
     }
+
+    public Program semanticAnalysis() {
+        // Scope-in one step. (function)
+		pushSymbolScope(GLOBAL);
+
+		Program p = new Program(null, null);
+		if (this.declList != null) {
+			p.declList = this.declList.semanticAnalysis();
+		}
+        if (this.funcList != null) {
+			p.funcList = this.funcList.semanticAnalysis();
+		}
+
+		// Scope-out one step.
+		popSymbolScope();
+		return p;
+    }
 }

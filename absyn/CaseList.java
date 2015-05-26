@@ -29,4 +29,12 @@ public class CaseList extends Absyn {
             c.printSymTable();
         }
     }
+
+    public CaseList semanticAnalysis() {
+        CaseList c = new CaseList(null);
+        for (CaseStmt cs : this.caseList) {
+            c.add(cs.semanticAnalysis());
+        }
+        return c;
+    }
 }

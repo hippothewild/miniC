@@ -40,4 +40,12 @@ public class ParamList extends Absyn {
             printSymTableRow(typeStr, p.identifier.name, p.identifier.size, "parameter");
         }
     }
+
+    public ParamList semanticAnalysis() {
+        ParamList pl = new ParamList(null);
+        for (Param p : this.paramList) {
+            pl.add(p.semanticAnalysis());
+        }
+        return pl;
+    }
 }

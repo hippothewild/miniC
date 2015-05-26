@@ -44,4 +44,13 @@ public class ForStmt extends Stmt {
 		scopeCount = tempScopeCount;
 		scopeStack.remove(scopeStack.size() - 1);
 	}
+
+	public ForStmt semanticAnalysis() {
+		ForStmt f = new ForStmt(null, null, null, null);
+		f.initial = this.initial.semanticAnalysis();
+		f.condition = this.condition.semanticAnalysis();
+		f.next = this.next.semanticAnalysis();
+		f.body = this.body.semanticAnalysis();
+		return f;
+	}
 }

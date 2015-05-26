@@ -49,4 +49,12 @@ public class StmtList extends Absyn {
             }
         }
     }
+
+    public StmtList semanticAnalysis() {
+        StmtList sl = new StmtList(null);
+        for (Stmt s : this.stmtList) {
+            sl.add(s.semanticAnalysis());
+        }
+        return sl;
+    }
 }

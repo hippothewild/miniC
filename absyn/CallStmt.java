@@ -13,4 +13,10 @@ public class CallStmt extends Stmt {
         call.printAST();
         printWriter.println(";");
     }
+
+    public CallStmt semanticAnalysis() {
+        CallStmt c = new CallStmt(null);
+        c.call = this.call.semanticAnalysis();
+        return c;
+    }
 }

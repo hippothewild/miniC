@@ -49,4 +49,11 @@ public class WhileStmt extends Stmt {
 		scopeCount = tempScopeCount;
 		scopeStack.remove(scopeStack.size() - 1);
 	}
+
+	public WhileStmt semanticAnalysis() {
+		WhileStmt w = new WhileStmt(null, null, this.isDoWhile);
+		w.expr = this.expr.semanticAnalysis();
+		w.stmt = this.stmt.semanticAnalysis();
+		return w;
+	}
 }

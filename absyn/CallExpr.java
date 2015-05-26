@@ -12,4 +12,10 @@ public class CallExpr extends Expr {
     public void printAST() {
         call.printAST();
     }
+
+    public CallExpr semanticAnalysis() {
+        CallExpr c = new CallExpr(null);
+        c.call = this.call.semanticAnalysis();
+        return c;
+    }
 }

@@ -30,4 +30,21 @@ public class CompoundStmt extends Stmt {
 			stmtList.printSymTable();
 		}
 	}
+
+	public CompoundStmt semanticAnalysis() {
+		// Scope-in one step. (COMPOUND)
+		pushSymbolScope(COMPOUND);
+
+		CompoundStmt c = new CompoundStmt(null, null);
+		if (declList != null) {
+			c.declList = this.declList.semanticAnalysis();
+		}
+		if (stmtList != null) {
+			c.stmtList = this.stmtList.semanticAnalysis();
+		}
+
+		// Scope-out one step.
+		popSymbolScope();
+		return c;
+	}
 }

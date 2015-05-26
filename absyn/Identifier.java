@@ -22,4 +22,8 @@ public class Identifier extends Absyn {
             printWriter.printf("[%d]", size);
         }
     }
+
+    public Identifier semanticAnalysis() {
+        return this;
+    }
 }

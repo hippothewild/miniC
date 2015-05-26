@@ -37,4 +37,11 @@ public class CompareExpr extends Expr {
         }
         rhs.printAST();
     }
+
+    public CompareExpr semanticAnalysis() {
+        CompareExpr c = new CompareExpr(null, this.comp, null);
+        c.lhs = this.lhs.semanticAnalysis();
+        c.rhs = this.rhs.semanticAnalysis();
+        return c;
+    }
 }

@@ -35,4 +35,10 @@ public class DefaultStmt extends Stmt {
 		scopeCount = tempScopeCount;
 		scopeStack.remove(scopeStack.size() - 1);
 	}
+
+    public DefaultStmt semanticAnalysis() {
+        DefaultStmt d = new DefaultStmt(null, this.hasBreak);
+        d.stmtList = this.stmtList.semanticAnalysis();
+        return d;
+    }
 }

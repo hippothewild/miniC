@@ -29,4 +29,12 @@ public class FuncList extends Absyn {
             f.printSymTable();
         }
     }
+
+	public FuncList semanticAnalysis() {
+		FuncList fl = new FuncList(null);
+		for (FunctionDec f : this.funcList) {
+			fl.add(f.semanticAnalysis());
+		}
+		return fl;
+	}
 }

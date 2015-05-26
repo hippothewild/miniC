@@ -27,4 +27,12 @@ public class DeclList extends Absyn {
             d.printSymTable();
         }
     }
+
+    public DeclList semanticAnalysis() {
+        DeclList dl = new DeclList(null);
+        for (Declaration d : this.declList) {
+            dl.add(d.semanticAnalysis());
+        }
+        return dl;
+    }
 }

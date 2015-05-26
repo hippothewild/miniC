@@ -16,4 +16,9 @@ public class Param extends Absyn {
         printWriter.print(" ");
         identifier.printAST();
     }
+
+    public Param semanticAnalysis() {
+        getCurrentFunctionScope().addSymbol(this.identifier.name, this.type, this.identifier.size);
+        return this;
+    }
 }

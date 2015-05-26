@@ -37,4 +37,11 @@ public class SwitchStmt extends Stmt {
 		scopeCount = tempScopeCount;
 		scopeStack.remove(scopeStack.size() - 1);
 	}
+
+	public SwitchStmt semanticAnalysis() {
+		SwitchStmt ss = new SwitchStmt(null, null);
+		ss.identifier = this.identifier.semanticAnalysis();
+		ss.caseBlock = this.caseBlock.semanticAnalysis();
+		return ss;
+	}
 }

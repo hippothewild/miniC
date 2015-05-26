@@ -10,7 +10,7 @@ public class Call extends Absyn {
         name = n;
         args = a;
     }
-    
+
     public void printAST() {
         printWriter.print(name);
         printWriter.print("(");
@@ -18,5 +18,11 @@ public class Call extends Absyn {
             args.printAST();
         }
         printWriter.print(")");
+    }
+
+    public Call semanticAnalysis() {
+        Call c = new Call(this.name, null);
+        c.args = this.args.semanticAnalysis();
+        return c;
     }
 }

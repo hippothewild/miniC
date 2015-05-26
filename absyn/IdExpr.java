@@ -26,4 +26,10 @@ public class IdExpr extends Expr {
             printWriter.printf("]");
         }
     }
+
+    public IdExpr semanticAnalysis() {
+        IdExpr i = new IdExpr(this.name);
+        i.index = this.index.semanticAnalysis();
+        return i;
+    }
 }

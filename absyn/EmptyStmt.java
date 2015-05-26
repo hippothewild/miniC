@@ -10,4 +10,8 @@ public class EmptyStmt extends Stmt {
     public void printAST() {
         printWriter.println(";");
     }
+
+    public EmptyStmt semanticAnalysis() {
+        return this;
+    }
 }

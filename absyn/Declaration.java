@@ -33,4 +33,10 @@ public class Declaration extends Absyn {
             printSymTableRow(typeStr, i.name, i.size, "variable");
         }
     }
+
+    public Declaration semanticAnalysis() {
+        Declaration d = new Declaration(this.type, null);
+        d.identList = this.identList.semanticAnalysis();
+        return d;
+    }
 }

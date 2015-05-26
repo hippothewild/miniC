@@ -45,4 +45,21 @@ public class FunctionDec extends Absyn {
 		scopeCount = tempScopeCount;
 		scopeStack.remove(scopeStack.size() - 1);
     }
+
+	public FunctionDec semanticAnalysis() {
+		// Scope-in one step. (function)
+		pushSymbolScope(this.name);
+		pushFunctionScope(this.type, this.name);
+
+		FunctionDec f = new FunctionDec(this.type, this.name, null, null);
+		if (this.params != null) {
+			f.params = this.params.semanticAnalysis();
+		}
+		f.body = this.body.semanticAnalysis();
+
+		// Scope-out one step.
+		popSymbolScope();
+		popFunctionScope();
+		return f;
+	}
 }

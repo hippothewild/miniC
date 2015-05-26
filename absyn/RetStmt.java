@@ -17,4 +17,10 @@ public class RetStmt extends Stmt {
         }
         printWriter.println(";");
     }
+
+    public RetStmt semanticAnalysis() {
+        RetStmt r = new RetStmt(null);
+        r.expr = this.expr.semanticAnalysis();
+        return r;
+    }
 }
