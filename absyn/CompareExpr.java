@@ -41,13 +41,30 @@ public class CompareExpr extends Expr {
     }
 
     private void typeCheck() {
-        if(lhs.getType() != rhs.getType()) {
-            raiseWarn("Type mismatched, this compare expression should have same type at both side");
-            this.setType(TypeName.FLOAT);
-            this.typeMismatched = true;
+        if (lhs.getType() != TypeName.INT && lhs.getType() != TypeName.FLOAT) {
+            raiseError(TYPE_ERR, "Error in compare expression - left hand side expects float or int type, but got other type.");
+        }
+        if (rhs.getType() != TypeName.INT && rhs.getType() != TypeName.FLOAT) {
+            raiseError(TYPE_ERR, "Error in compare expression - right hand side expects float or int type, but got other type.");
+        }
+
+        if (this.comp == Comparer.EQ || this.comp == Comparer.NOT_EQ) {
+            // '==' or '!=' operator; lhs and rhs must be exactly same type.
+            if (lhs.getType() != rhs.getType()) {
+                raiseError(TYPE_ERR, "Type mismatched, this compare expression should have same type at both side.");
+            } else {
+                this.typeMismatched = false;
+                this.setType(TypeName.INT); // Result of compare will be -1, 0, or 1.
+            }
         } else {
-            this.setType(lhs.getType());
-            this.typeMismatched = false;
+            if(lhs.getType() != rhs.getType()) {
+                raiseWarn("Type mismatched, this compare expression should have same type at both side");
+                this.typeMismatched = true;
+            } else {
+                this.typeMismatched = false;
+            }
+
+            this.setType(TypeName.INT); // Result of compare will be -1, 0, or 1.
         }
     }
 

@@ -36,14 +36,14 @@ public class BinaryExpr extends Expr {
 
     private void typeCheck() {
         if (lhs.getType() != TypeName.INT && lhs.getType() != TypeName.FLOAT) {
-            raiseError(TYPE_ERR, "Error in binary expression - left hand side expects float or int type, but got other type");
+            raiseError(TYPE_ERR, "Error in binary expression - left hand side expects float or int type, but got other type.");
         }
         if (rhs.getType() != TypeName.INT && rhs.getType() != TypeName.FLOAT) {
-            raiseError(TYPE_ERR, "Error in binary expression - right hand side expects float or int type, but got other type");
+            raiseError(TYPE_ERR, "Error in binary expression - right hand side expects float or int type, but got other type.");
         }
 
         if(lhs.getType() != rhs.getType()) {
-            raiseWarn("Type mismatched, this binary expression should have same type at both side");
+            raiseWarn("Type mismatched, this binary expression should have same type at both side.");
             this.setType(TypeName.FLOAT);
             this.typeMismatched = true;
         } else {
