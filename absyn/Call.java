@@ -44,7 +44,7 @@ public class Call extends Expr {
                 Expr arg = this.args.argList.get(i).semanticAnalysis();
 
                 if(param.type.typeName != arg.type.typeName) {
-                    raiseError(TYPE_ERR, "Type mismatch - " + param.type.typeName + " and " + arg.type.typeName);
+                    raiseError(TYPE_ERR, "Type mismatch at param " + i + " - " + param.type.typeName + " and " + arg.type.typeName);
                 }
                 c.args.add(arg);
             }

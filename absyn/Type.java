@@ -37,7 +37,7 @@ public class Type extends Absyn {
         case FLOAT_ARRAY:
             return new Type(TypeName.FLOAT_ARRAY);
         }
-        raiseError(TYPE_ERR, "FATAL - Type not specified");
+        raiseError(TYPE_ERR, "FATAL - Type not specified when changing type to ArrayType");
         return null;
     }
 
@@ -52,7 +52,7 @@ public class Type extends Absyn {
         case FLOAT_ARRAY:
             return new Type(TypeName.FLOAT);
         }
-        raiseError(TYPE_ERR, "FATAL - Type not specified");
+        raiseError(TYPE_ERR, "FATAL - Type not specified whe changing type to SingleType");
         return null;
     }
 

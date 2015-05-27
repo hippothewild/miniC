@@ -18,7 +18,7 @@ public class ParenExpr extends Expr {
     public ParenExpr semanticAnalysis() {
         ParenExpr p = new ParenExpr(null);
         p.expr = this.expr.semanticAnalysis();
-        p.setType(this.expr.getType());
+        p.setType(p.expr.getType());
         return p;
     }
 }
