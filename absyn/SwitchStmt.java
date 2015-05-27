@@ -43,6 +43,7 @@ public class SwitchStmt extends Stmt {
         if (sym == null) {
             raiseError(SEMANTIC_ERR, "Variable " + this.identifier.name + " is not declared.");
         }
+		// TODO : Does identifier in switch case need type check?
 
 		SwitchStmt ss = new SwitchStmt(null, null);
 		ss.identifier = this.identifier.semanticAnalysis();

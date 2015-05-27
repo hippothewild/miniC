@@ -54,6 +54,7 @@ List of semantic analysis checklist :
 - (Type Check) Are both side of binary/comparing expression proper type, int or float?
 - (Type Check) Are all types of declared function parameters and following arguments matched?
 - (Type Check) Is the type of array index int?
+- (Type Check) Are all conditions in if/for/switch/while have proper type value? (int or float)
 
 Reference
 -------

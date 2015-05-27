@@ -49,6 +49,9 @@ public class ForStmt extends Stmt {
 		ForStmt f = new ForStmt(null, null, null, null);
 		f.initial = this.initial.semanticAnalysis();
 		f.condition = this.condition.semanticAnalysis();
+		if (f.condition.getType() != TypeName.INT && f.condition.getType() != TypeName.FLOAT) {
+			raiseError(TYPE_ERR, "Error in for statement : type of condition should be single number type");
+		}
 		f.next = this.next.semanticAnalysis();
 		f.body = this.body.semanticAnalysis();
 		return f;

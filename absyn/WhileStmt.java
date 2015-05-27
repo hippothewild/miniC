@@ -53,6 +53,9 @@ public class WhileStmt extends Stmt {
 	public WhileStmt semanticAnalysis() {
 		WhileStmt w = new WhileStmt(null, null, this.isDoWhile);
 		w.expr = this.expr.semanticAnalysis();
+		if (w.expr.getType() != TypeName.INT && w.expr.getType() != TypeName.FLOAT) {
+			raiseError(TYPE_ERR, "Error in for statement : type of condition should be single number type");
+		}
 		w.stmt = this.stmt.semanticAnalysis();
 		return w;
 	}
