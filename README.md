@@ -51,6 +51,7 @@ List of semantic analysis checklist :
 - (Scope Check) Are all identifiers used after declared in correct scope?
 - (Scope Check) Are all array identifiers and single identifiers are correctly referenced?
 - (Scope Check) Are all functions and identifiers declared only once?
+- (Scope Check) Does program have main() function in global scope?
 - (Type Check) Are both side of binary/comparing expression proper type, int or float?
 - (Type Check) Are all types of declared function parameters and following arguments matched?
 - (Type Check) Is the type of array index int?

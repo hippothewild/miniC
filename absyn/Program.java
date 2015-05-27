@@ -44,6 +44,10 @@ public class Program extends Absyn {
 
 		// Scope-out one step.
 		popSymbolScope();
+
+        if (getFunctionScope("main") == null) {
+            raiseError(SEMANTIC_ERR, "Program should have main() function.");
+        }
 		return p;
     }
 }
