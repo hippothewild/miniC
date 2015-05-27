@@ -1,7 +1,7 @@
 MiniC Parser & Compiler
 =====================
 
-This repo contains parser of miniC grammar(http://www2.ufersa.edu.br/portal/view/uploads/setores/184/AppendixA.pdf), which is part of the term project in KAIST CS420(Compiler Design) course.
+This repo contains compiler of miniC grammar(http://www2.ufersa.edu.br/portal/view/uploads/setores/184/AppendixA.pdf), which is the term project in KAIST CS420(Compiler Design) course.
 
 Build & Run
 -------
@@ -46,7 +46,8 @@ static public String  encoding            = "UTF-8";
 
 Semantic Analysis
 -------
-The compiler will do semantic analysis on given input and raise appropriate compile error when needed.  
+The compiler will do semantic analysis on given input and raise compile error when needed.  
+
 List of semantic analysis checklist :
 - (Scope Check) Are all identifiers used after declared in correct scope?
 - (Scope Check) Are all array identifiers and single identifiers are correctly referenced?
@@ -58,6 +59,11 @@ List of semantic analysis checklist :
 - (Type Check) Are all conditions in if/for/switch/while have proper type value? (int or float)
 - (Type Check) Are all functions return appropriate typed value?
 - (Type Check) Are all assign statements assign correct typed value for given identifiers?
+
+Note - Some soft type conversions will be allowed but compiler will raise warn.
+- Assigning int expression to float identifier
+- Binary operation(+-*/) of int expression and float expression
+- Comparing int expression and float expression
 
 Reference
 -------
