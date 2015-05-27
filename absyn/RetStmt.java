@@ -20,7 +20,25 @@ public class RetStmt extends Stmt {
 
     public RetStmt semanticAnalysis() {
         RetStmt r = new RetStmt(null);
-        r.expr = this.expr.semanticAnalysis();
+        if (this.expr == null) {
+            raiseError(SEMANTIC_ERR, "Function " + getCurrentFunctionScope().scopeName + " returns nothing.");
+        } else {
+            r.expr = this.expr.semanticAnalysis();
+        }
+
+        // Type check return expr's type and current function's expected return type.
+        Type expectedType = getCurrentFunctionScope().type;
+        Type retType = r.expr.type;
+        if (expectedType.typeName != retType.typeName) {
+            raiseError(TYPE_ERR, "Function "
+                                    + getCurrentFunctionScope().scopeName
+                                    + " expects "
+                                    + expectedType.typeStr()
+                                    + " as a return type but got "
+                                    + retType.typeStr()
+                                    + ".");
+        }
+
         return r;
     }
 }

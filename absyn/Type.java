@@ -52,8 +52,23 @@ public class Type extends Absyn {
         case FLOAT_ARRAY:
             return new Type(TypeName.FLOAT);
         }
-        raiseError(TYPE_ERR, "FATAL - Type not specified whe changing type to SingleType");
+        raiseError(TYPE_ERR, "FATAL - Type not specified when changing type to SingleType");
         return null;
+    }
+
+    public String typeStr() {
+        switch (this.typeName) {
+        case INT:
+            return "int";
+        case FLOAT:
+            return "float";
+        case INT_ARRAY:
+            return "int[]";
+        case FLOAT_ARRAY:
+            return "float[]";
+        }
+        raiseError(TYPE_ERR, "FATAL - Type not specified");
+        return "undefined";
     }
 
     public Type semanticAnalysis() {
