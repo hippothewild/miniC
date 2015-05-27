@@ -23,7 +23,7 @@ public class Absyn {
         System.exit(0);
     }
     static public void raiseWarn(String msg) {
-        System.err.println("WARN : " + msg);
+        System.err.println("Type warn : " + msg);
     }
 
     // Symbol table assisting variables and functions.

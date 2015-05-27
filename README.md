@@ -55,6 +55,8 @@ List of semantic analysis checklist :
 - (Type Check) Are all types of declared function parameters and following arguments matched?
 - (Type Check) Is the type of array index int?
 - (Type Check) Are all conditions in if/for/switch/while have proper type value? (int or float)
+- (Type Check) Are all functions return appropriate typed value?
+- (Type Check) Are all assign statements assign correct typed value for given identifiers?
 
 Reference
 -------
