@@ -16,6 +16,7 @@ public class CallExpr extends Expr {
     public CallExpr semanticAnalysis() {
         CallExpr c = new CallExpr(null);
         c.call = this.call.semanticAnalysis();
+        c.setType(c.call.getType());
         return c;
     }
 }

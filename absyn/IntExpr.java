@@ -7,6 +7,7 @@ public class IntExpr extends Expr {
 
     public IntExpr(int n) {
         num = n;
+        this.setType(TypeName.INT);
     }
 
     public void printAST() {

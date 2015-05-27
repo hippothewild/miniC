@@ -14,4 +14,11 @@ public class ParenExpr extends Expr {
         expr.printAST();
         printWriter.print(")");
     }
+
+    public ParenExpr semanticAnalysis() {
+        ParenExpr p = new ParenExpr(null);
+        p.expr = this.expr.semanticAnalysis();
+        p.setType(this.expr.getType());
+        return p;
+    }
 }

@@ -25,12 +25,4 @@ public class ArgList extends Absyn {
         }
         argList.get(argList.size() - 1).printAST();
     }
-
-    public ArgList semanticAnalysis() {
-        ArgList a = new ArgList(null);
-        for (Expr e : this.argList) {
-            a.add(e.semanticAnalysis());
-        }
-        return a;
-    }
 }

@@ -7,6 +7,7 @@ public class FloatExpr extends Expr {
 
     public FloatExpr(float n) {
         num = n;
+        this.setType(TypeName.FLOAT);
     }
 
     public void printAST() {

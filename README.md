@@ -32,7 +32,7 @@ AST & Symbol Table Results
 -------
 When you run the parser by `make run` or `make test`, it will print out AST generation and symbol table as two binary files:  
 ```
-  SYMBOL TABLE : sym_table.out
+SYMBOL TABLE   : sym_table.out
 AST GENERATION : ast.out
 ```
 You can configure your own output settings in `absyn/Absyn.java`. Default setting is:
@@ -51,6 +51,9 @@ List of semantic analysis checklist :
 - (Scope Check) Are all identifiers used after declared in correct scope?
 - (Scope Check) Are all array identifiers and single identifiers are correctly referenced?
 - (Scope Check) Are all functions and identifiers declared only once?
+- (Type Check) Are both side of binary/comparing expression proper type, int or float?
+- (Type Check) Are all types of declared function parameters and following arguments matched?
+- (Type Check) Is the type of array index int?
 
 Reference
 -------

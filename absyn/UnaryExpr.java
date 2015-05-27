@@ -18,6 +18,7 @@ public class UnaryExpr extends Expr {
     public UnaryExpr semanticAnalysis() {
         UnaryExpr u = new UnaryExpr(null);
         u.expr = this.expr.semanticAnalysis();
+        u.setType(u.expr.getType());
         return u;
     }
 }

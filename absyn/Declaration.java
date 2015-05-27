@@ -41,7 +41,12 @@ public class Declaration extends Absyn {
             if (ss != null && ss.contains(id.name)) {
                 raiseError(SEMANTIC_ERR, "Variable " + id.name + " is already declared before.");
             }
-            ss.addSymbol(id.name, this.type, id.size);
+
+            if (id.size > 0) {
+                ss.addSymbol(id.name, this.type.toArrayType(), id.size);
+            } else {
+                ss.addSymbol(id.name, this.type.toSingleType(), id.size);
+            }
         }
 
         Declaration d = new Declaration(this.type, this.identList);

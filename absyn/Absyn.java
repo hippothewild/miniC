@@ -15,12 +15,15 @@ public class Absyn {
     // Writer object.
     static public PrintWriter printWriter = null;
 
-    // Error raising function.
+    // Error & Warn raising function.
     static final String SEMANTIC_ERR = "Semantic error";
     static final String TYPE_ERR = "Type error";
     static public void raiseError(String errType, String msg) {
         System.err.println(errType + " : " + msg);
         System.exit(0);
+    }
+    static public void raiseWarn(String msg) {
+        System.err.println("WARN : " + msg);
     }
 
     // Symbol table assisting variables and functions.
