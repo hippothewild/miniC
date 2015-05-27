@@ -7,20 +7,16 @@ import java.util.*;
 public class FunctionScope {
     Type type;                          // Type of the function.
     String scopeName;                   // Name of the function.
-    HashMap<String, Symbol> symbolMap;  // List of symbols in the function.
+    ArrayList<Symbol> paramList;        // List of parameters in the function.
 
     public FunctionScope(Type type, String scopeName) {
         this.type = type;
         this.scopeName = scopeName;
-        this.symbolMap = new HashMap<String, Symbol>();
+        this.paramList = new ArrayList<Symbol>();
     }
 
-    public void addSymbol(String symbolName, Type type, int length) {
+    public void addSymbol(Type type, int length) {
         Symbol symbol = new Symbol(type, length, RoleName.PARAMETER);
-        symbolMap.put(symbolName, symbol);
-    }
-
-    public boolean contains(String symbolName) {
-        return this.symbolMap.containsKey(symbolName);
+        paramList.add(symbol);
     }
 }

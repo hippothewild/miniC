@@ -64,8 +64,8 @@ public class Absyn {
 
 
     // Stack of scope for semantic analysis.
-    static private ArrayList<SymbolScope> symbolTable = new ArrayList<SymbolScope>();
-    static private ArrayList<FunctionScope> functionTable = new ArrayList<FunctionScope>();
+    static private ArrayList<SymbolScope> symbolTable = new ArrayList<SymbolScope>();       // Symbol scope.
+    static private ArrayList<FunctionScope> functionTable = new ArrayList<FunctionScope>(); // Function parameter types.
     static final String GLOBAL = "GLOBAL";
     static final String COMPOUND = "COMPOUND";
 
@@ -100,17 +100,6 @@ public class Absyn {
         for (int j = symbolTable.size()-1; j >= 0; j--) {
             if (symbolTable.get(j).contains(name)) {
                 return symbolTable.get(j).symbolMap.get(name);
-            }
-        }
-        return null;
-    }
-
-    static public Symbol getSymbolFromFunctionTable(String functionName, String name) {
-        FunctionScope func = getFunctionScope(functionName);
-
-        if (func != null) {
-            if (func.contains(name)) {
-                return func.symbolMap.get(name);
             }
         }
         return null;

@@ -36,14 +36,10 @@ public class Declaration extends Absyn {
 
     public Declaration semanticAnalysis() {
         SymbolScope ss = getCurrentSymbolScope();
-        FunctionScope fs = getCurrentFunctionScope();
 
         for (Identifier id : this.identList.identList) {
             if (ss != null && ss.contains(id.name)) {
                 raiseError(SEMANTIC_ERR, "Variable " + id.name + " is already declared before.");
-            }
-            if (fs != null && fs.contains(id.name)) {
-                raiseError(SEMANTIC_ERR, "Variable " + id.name + " is already declared at function parameter.");
             }
             ss.addSymbol(id.name, this.type, id.size);
         }

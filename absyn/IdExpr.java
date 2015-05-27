@@ -31,9 +31,6 @@ public class IdExpr extends Expr {
         // Do semantic check for given identifier.
         Symbol sym = getSymbolFromSymbolTable(this.name);
         if (sym == null) {
-            sym = getSymbolFromFunctionTable(getCurrentFunctionScope().scopeName, this.name);
-        }
-        if (sym == null) {
             raiseError(SEMANTIC_ERR, "Variable " + this.name + " is not declared.");
         }
         if (this.isArray) {
