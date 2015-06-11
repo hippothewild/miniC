@@ -84,7 +84,9 @@ precedence right ASSIGN;
 absyn ::= program:p
 		  {:
 			  // Do semantic analysis first to generate symbol tables and do semantic checks.
+			  Absyn.printWriter = new PrintWriter(Absyn.compiledFileName, Absyn.encoding);
 			  p = p.semanticAnalysis();
+			  Absyn.printWriter.close();
 
 			  if (Absyn.optionPrintAST) {
 				  // Print out AST at given file name.

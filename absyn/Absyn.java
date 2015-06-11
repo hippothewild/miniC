@@ -9,6 +9,7 @@ public class Absyn {
     static public String  astOutputName       = "ast.out";
     static public boolean optionPrintSymTable = true;
     static public String  symTableOutputName  = "sym_table.out";
+    static public String  compiledFileName    = "out.T";
     static public String  encoding            = "UTF-8";
 
 

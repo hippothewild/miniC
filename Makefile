@@ -45,3 +45,4 @@ vclean:
 	-rm sym.java
 	-rm java_cup/runtime/*.class
 	-rm -r Example/
+	-rm out.T
