@@ -13,4 +13,9 @@ public class IntExpr extends Expr {
     public void printAST() {
         printWriter.print(num);
     }
+
+    public IntExpr semanticAnalysis() {
+        printWriter.println("    MOVE " + this.num + " VR(0)");
+        return this;
+    }
 }

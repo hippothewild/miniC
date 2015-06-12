@@ -24,6 +24,10 @@ public class RetStmt extends Stmt {
             raiseError(SEMANTIC_ERR, "Function " + getCurrentFunctionScope().scopeName + " returns nothing.");
         } else {
             r.expr = this.expr.semanticAnalysis();
+            printWriter.println("    MOVE FP@ SP");
+            printWriter.println("    MOVE MEM(FP@)@ FP");
+            printWriter.println("    SUB SP@ 1 SP");
+            printWriter.println("    JMP MEM(SP@)@");
         }
 
         // Type check return expr's type and current function's expected return type.

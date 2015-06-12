@@ -37,9 +37,12 @@ public class CompoundStmt extends Stmt {
 
 		CompoundStmt c = new CompoundStmt(null, null);
 		if (declList != null) {
+			int curEsp = esp;
 			c.declList = this.declList.semanticAnalysis();
-		}
-		if (stmtList != null) {
+			c.stmtList = this.stmtList.semanticAnalysis();
+			printWriter.println("    ADD SP@ " + (curEsp-esp) + " SP");
+			esp = curEsp;
+		} else {
 			c.stmtList = this.stmtList.semanticAnalysis();
 		}
 

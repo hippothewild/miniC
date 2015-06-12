@@ -123,13 +123,21 @@ public class Absyn {
     static public int blockIdx = 0;
     static public int labelNum = 1;
     static public void push(int value) {
-        printWriter.println("    ADD   ESP@  1 ESP");
-        printWriter.println("    MOVE  "+value+" MEM(ESP@)");
+        printWriter.println("    ADD SP@ 1 SP");
+        printWriter.println("    MOVE " + value + " MEM(SP@)");
         esp++;
     }
     static public void push(String value) {
-        printWriter.println("    ADD   ESP@  1 ESP");
-        printWriter.println("    MOVE  "+value+" MEM(ESP@)");
+        printWriter.println("    ADD SP@ 1 SP");
+        printWriter.println("    MOVE " + value + " MEM(SP@)");
         esp++;
+    }
+    static public void pop(int value) {
+        printWriter.println("    MOVE MEM(SP@)@ " + value);
+        printWriter.println("    SUB SP@ 1 SP");
+    }
+    static public void pop(String value) {
+        printWriter.println("    MOVE MEM(SP@)@ " + value);
+        printWriter.println("    SUB SP@ 1 SP");
     }
 }

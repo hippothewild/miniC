@@ -34,12 +34,41 @@ public class CaseBlock extends Absyn {
         }
 	}
 
-    public CaseBlock semanticAnalysis() {
+    public CaseBlock semanticAnalysis(int previousLabelNum) {
         CaseBlock c = new CaseBlock(null);
-        c.caseList = this.caseList.semanticAnalysis();
+
         if (this.defaultStmt != null) {
+            int defaultStmtLabelNum = previousLabelNum++;
+            int caseStmtLabelNum = previousLabelNum;
+            labelNum++;
+            blockIdx++;
+            for (CaseStmt s : c.caseList.caseList) {
+                caseStmtLabelNum++;
+                printWriter.println("    SUB VR(0)@ " + s.num + " VR(" + blockIdx + ")");
+                printWriter.println("    JMPZ VR(" + blockIdx + ")@ LABEL" + caseStmtLabelNum);
+            }
+            blockIdx--;
+            printWriter.println("    JMP LABEL" + defaultStmtLabelNum);
+            c.caseList = this.caseList.semanticAnalysis();
+            printWriter.println("LAB LABEL" + defaultStmtLabelNum);
             c.defaultStmt = this.defaultStmt.semanticAnalysis();
+            printWriter.println("LAB LABEL" + previousLabelNum);
+        } else {
+            blockIdx++;
+            int caseStmtLabelNum = previousLabelNum;
+            for (CaseStmt s : c.caseList.caseList) {
+                caseStmtLabelNum++;
+                printWriter.println("    SUB VR(0)@ " + s.num + " VR(" + blockIdx + ")");
+                printWriter.println("    JMPZ VR(" + blockIdx + ")@ LABEL" + caseStmtLabelNum);
+            }
+            blockIdx--;
+            printWriter.println("    JMP LABEL" + previousLabelNum);
+            c.caseList = this.caseList.semanticAnalysis();
+            c.defaultStmt = null;
+            printWriter.println("LAB LABEL" + previousLabelNum);
         }
+
+        labelNum++;
         return c;
     }
 }

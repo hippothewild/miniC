@@ -43,11 +43,13 @@ public class SwitchStmt extends Stmt {
         if (sym == null) {
             raiseError(SEMANTIC_ERR, "Variable " + this.identifier.name + " is not declared.");
         }
-		// TODO : Does identifier in switch case need type check?
+		sym.tGetValue();
+		printWriter.println("    MOVE MEM(VR(0)@)@ VR(0)");
 
 		SwitchStmt ss = new SwitchStmt(null, null);
+		int previousLabelNum = labelNum;
 		ss.identifier = this.identifier.semanticAnalysis();
-		ss.caseBlock = this.caseBlock.semanticAnalysis();
+		ss.caseBlock = this.caseBlock.semanticAnalysis(previousLabelNum);
 		return ss;
 	}
 }

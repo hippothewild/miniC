@@ -43,10 +43,13 @@ public class Declaration extends Absyn {
             }
 
             if (id.size > 0) {
+                printWriter.println("    ADD SP@ 1 VR(" + (blockIdx+1) + ")");
+                printWriter.println("    ADD SP@ " + id.size + " SP");
+                push("VR(" + (blockIdx+1) + ")@");
                 esp += id.size;
                 ss.addSymbol(id.name, this.type.toArrayType(), id.size, esp-1);
             } else {
-                esp++;
+                push(0);
                 ss.addSymbol(id.name, this.type.toSingleType(), id.size, esp-1);
             }
         }

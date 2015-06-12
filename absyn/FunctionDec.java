@@ -47,6 +47,10 @@ public class FunctionDec extends Absyn {
     }
 
 	public FunctionDec semanticAnalysis() {
+		// Clear esp; will be recovered when function call end.
+		esp = 1;
+		printWriter.println("LAB " + this.name);
+
 		// Check if function name is declared by another function or variable.
 		if (getFunctionScope(this.name) != null) {
 			raiseError(SEMANTIC_ERR, "Function name " + this.name + " is already declared by another function.");
@@ -63,6 +67,11 @@ public class FunctionDec extends Absyn {
 			f.params = this.params.semanticAnalysis();
 		}
 		f.body = this.body.semanticAnalysis();
+
+		printWriter.println("    MOVE FP@ SP");
+		printWriter.println("    MOVE MEM(FP@)@ FP");
+		printWriter.println("    SUB SP@ 1 SP");
+		printWriter.println("    JMP MEM(SP@)@");
 
 		// Scope-out one step.
 		popSymbolScope();

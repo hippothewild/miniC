@@ -5,8 +5,8 @@ import java.util.*;
 public class ForStmt extends Stmt {
 	Assign initial;
 	Expr condition;
-	Assign next;
 	Stmt body;
+	Assign next;
 
 	public ForStmt(Assign i, Expr c, Assign n, Stmt b) {
 		initial = i;
@@ -48,12 +48,22 @@ public class ForStmt extends Stmt {
 	public ForStmt semanticAnalysis() {
 		ForStmt f = new ForStmt(null, null, null, null);
 		f.initial = this.initial.semanticAnalysis();
+
+		int condStartLabelNum = labelNum++;
+		printWriter.println("LAB LABEL" + condStartLabelNum);
 		f.condition = this.condition.semanticAnalysis();
-		if (f.condition.getType() != TypeName.INT && f.condition.getType() != TypeName.FLOAT) {
+		int condFinishLabelNum = labelNum++;
+		printWriter.println("    JMPZ VR(0)@ LABEL" + condFinishLabelNum);
+
+		if (f.condition.getType() != TypeName.INT) {
 			raiseError(TYPE_ERR, "Error in for statement : type of condition should be single number type");
 		}
-		f.next = this.next.semanticAnalysis();
+
 		f.body = this.body.semanticAnalysis();
+		f.next = this.next.semanticAnalysis();
+
+		printWriter.println("    JMP LABEL" + condStartLabelNum);
+		printWriter.println("LAB LABEL" + condFinishLabelNum);
 		return f;
 	}
 }

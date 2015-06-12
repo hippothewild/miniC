@@ -41,6 +41,7 @@ static public boolean optionPrintAST      = true;
 static public String  astOutputName       = "ast.out";
 static public boolean optionPrintSymTable = true;
 static public String  symTableOutputName  = "sym_table.out";
+static public String  compiledFileName    = "out.T";
 static public String  encoding            = "UTF-8";
 ```
 
@@ -75,4 +76,4 @@ Copyright
 -------
 Jihwan Chun  
 <jihwan0321@kaist.ac.kr>  
-Last update Jun-12-2015
+Last update Jun-13-2015

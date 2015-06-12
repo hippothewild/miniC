@@ -68,13 +68,27 @@ public class IfStmt extends Stmt {
 	public IfStmt semanticAnalysis() {
 		IfStmt i = new IfStmt(null, null, null);
 		i.condition = this.condition.semanticAnalysis();
-		if (i.condition.getType() != TypeName.INT && i.condition.getType() != TypeName.FLOAT) {
+
+		if (i.condition.getType() != TypeName.INT) {
 			raiseError(TYPE_ERR, "Error in if statement : type of condition should be single number type");
 		}
-		i.thenStmt = this.thenStmt.semanticAnalysis();
+
 		if (this.elseStmt != null) {
+			int elseLabelNum = labelNum++;
+			int ifEndLabelNum = labelNum++;
+			printWriter.println("    JMPZ VR(0)@ LABEL" + elseLabelNum);
+			i.thenStmt = this.thenStmt.semanticAnalysis();
+			printWriter.println("    JMP LABEL" + ifEndLabelNum);
+			printWriter.println("LAB LABEL" + elseLabelNum);
 			i.elseStmt = this.elseStmt.semanticAnalysis();
+			printWriter.println("LAB LABEL" + ifEndLabelNum);
+		} else {
+			int ifEndLabelNum = labelNum++;
+			printWriter.println("    JMPZ VR(0)@ LABEL" + ifEndLabelNum);
+			i.thenStmt = this.thenStmt.semanticAnalysis();
+			printWriter.println("LAB LABEL" + ifEndLabelNum);
 		}
+
 		return i;
 	}
 }

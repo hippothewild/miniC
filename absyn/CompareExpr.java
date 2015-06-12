@@ -70,9 +70,63 @@ public class CompareExpr extends Expr {
 
     public CompareExpr semanticAnalysis() {
         CompareExpr c = new CompareExpr(null, this.comp, null);
+        String floatPrefix = "";
+
         c.lhs = this.lhs.semanticAnalysis();
+        blockIdx++;
+        printWriter.println("    MOVE VR(0)@ VR(" + blockIdx + ")");
+
         c.rhs = this.rhs.semanticAnalysis();
         c.typeCheck();
+        if (c.getType() == TypeName.FLOAT) {
+            floatPrefix = "F";
+        }
+
+        switch (c.comp) {
+        case EQ:
+        printWriter.println("    " + floatPrefix + "SUB VR(" + blockIdx + ")@ VR(0)@ VR(0)");
+        printWriter.println("    MOVE 1 VR(" + blockIdx + ")");
+        printWriter.println("    JMPZ VR(0)@ LABEL" + labelNum); // If true
+        printWriter.println("    MOVE 0 VR(" + blockIdx + ")");
+            break;
+        case NOT_EQ:
+            printWriter.println("    " + floatPrefix + "SUB VR(" + blockIdx + ")@ VR(0)@ VR(0)");
+            printWriter.println("    MOVE 0 VR(" + blockIdx + ")");
+            printWriter.println("    JMPZ VR(0)@ LABEL" + labelNum); // If false
+            printWriter.println("    MOVE 1 VR(" + blockIdx + ")");
+            break;
+        case LESS:
+            printWriter.println("    " + floatPrefix + "SUB VR(" + blockIdx + ")@ VR(0)@ VR(0)");
+            printWriter.println("    MOVE 1 VR(" + blockIdx + ")");
+            printWriter.println("    JMPN VR(0)@ LABEL" + labelNum); // If true
+            printWriter.println("    MOVE 0 VR(" + blockIdx + ")");
+            break;
+        case GREATER_EQ:
+            printWriter.println("    " + floatPrefix + "SUB VR(" + blockIdx + ")@ VR(0)@ VR(0)");
+            printWriter.println("    MOVE 0 VR(" + blockIdx + ")");
+            printWriter.println("    JMPN VR(0)@ LABEL" + labelNum); // If false
+            printWriter.println("    MOVE 1 VR(" + blockIdx + ")");
+            break;
+        case GREATER:
+            printWriter.println("    " + floatPrefix + "SUB VR(0)@ VR(" + blockIdx + ")@ VR(0)");
+            printWriter.println("    MOVE 1 VR(" + blockIdx + ")");
+            printWriter.println("    JMPN VR(0)@ LABEL" + labelNum); // If true
+            printWriter.println("    MOVE 0 VR(" + blockIdx + ")");
+            break;
+        case LESS_EQ:
+            printWriter.println("    " + floatPrefix + "SUB VR(0)@ VR(" + blockIdx + ")@ VR(0)");
+            printWriter.println("    MOVE 0 VR(" + blockIdx + ")");
+            printWriter.println("    JMPN VR(0)@ LABEL" + labelNum); // If true
+            printWriter.println("    MOVE 1 VR(" + blockIdx + ")");
+            break;
+        }
+
+        printWriter.println("LAB LABEL" + labelNum);
+        printWriter.println("    MOVE VR(" + blockIdx + ")@ VR(0)");
+
+        c.setType(TypeName.INT);
+        blockIdx--;
+        labelNum++;
         return c;
     }
 }

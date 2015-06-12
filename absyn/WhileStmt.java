@@ -51,12 +51,27 @@ public class WhileStmt extends Stmt {
 	}
 
 	public WhileStmt semanticAnalysis() {
+		int whileStartLabelNum = labelNum++;
+		int whileEndLabelNum = labelNum++;
+
 		WhileStmt w = new WhileStmt(null, null, this.isDoWhile);
-		w.expr = this.expr.semanticAnalysis();
+		printWriter.println("LAB LABEL" + whileStartLabelNum);
+		if (this.isDoWhile) {
+			w.stmt = this.stmt.semanticAnalysis();
+			w.expr = this.expr.semanticAnalysis();
+			printWriter.println("    JMPZ VR(0)@ LABEL" + whileEndLabelNum);
+		} else {
+			w.expr = this.expr.semanticAnalysis();
+			printWriter.println("    JMPZ VR(0)@ LABEL" + whileEndLabelNum);
+			w.stmt = this.stmt.semanticAnalysis();
+		}
+		printWriter.println("    JMP LABEL" + whileStartLabelNum);
+		printWriter.println("LAB LABEL" + whileEndLabelNum);
+
 		if (w.expr.getType() != TypeName.INT && w.expr.getType() != TypeName.FLOAT) {
 			raiseError(TYPE_ERR, "Error in for statement : type of condition should be single number type");
 		}
-		w.stmt = this.stmt.semanticAnalysis();
+
 		return w;
 	}
 }

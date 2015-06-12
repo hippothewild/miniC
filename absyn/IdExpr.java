@@ -49,10 +49,20 @@ public class IdExpr extends Expr {
             if (i.index.getType() != TypeName.INT) {
                 raiseError(TYPE_ERR, "Array index of variable " + this.name + " should be int type.");
             }
+
+            blockIdx++;
+            printWriter.println("    MOVE VR(0)@ VR(" + blockIdx + ")");
+            sym.tGetValue();
+            printWriter.println("    ADD MEM(VR(0)@)@ VR(" + blockIdx + ")@ VR(0)");
+            printWriter.println("    MOVE MEM(VR(0)@)@ VR(0)");
+            blockIdx--;
+
             i.setType(sym.type.toSingleType().typeName);
 
         } else {
             i.isArrayElem = false;
+            sym.tGetValue();
+            printWriter.println("    MOVE MEM(VR(0)@)@ VR(0)");
             i.setType(sym.type.typeName);
         }
 
