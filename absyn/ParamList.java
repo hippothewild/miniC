@@ -43,8 +43,9 @@ public class ParamList extends Absyn {
 
     public ParamList semanticAnalysis() {
         ParamList pl = new ParamList(null);
+        int paramPos = -this.paramList.size();
         for (Param p : this.paramList) {
-            pl.add(p.semanticAnalysis());
+            pl.add(p.semanticAnalysis(paramPos++));
         }
         return pl;
     }

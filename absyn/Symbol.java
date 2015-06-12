@@ -7,11 +7,13 @@ public class Symbol extends Absyn {
     Type type;
     int length;
     RoleName role;
+    int address;
 
-    public Symbol(Type type, int length, RoleName role) {
+    public Symbol(Type type, int length, RoleName role, int address) {
         this.type = type;
         this.length = length;
         this.role = role;
+        this.address = address;
     }
 
     public TypeName getType() {

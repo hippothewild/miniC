@@ -13,8 +13,8 @@ public class SymbolScope {
         this.symbolMap = new HashMap<String, Symbol>();
     }
 
-    public void addSymbol(String symbolName, Type type, int length) {
-        Symbol symbol = new Symbol(type, length, RoleName.VARIABLE);
+    public void addSymbol(String symbolName, Type type, int length, int address) {
+        Symbol symbol = new Symbol(type, length, RoleName.VARIABLE, address);
         symbolMap.put(symbolName, symbol);
     }
 

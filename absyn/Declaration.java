@@ -43,9 +43,11 @@ public class Declaration extends Absyn {
             }
 
             if (id.size > 0) {
-                ss.addSymbol(id.name, this.type.toArrayType(), id.size);
+                esp += id.size;
+                ss.addSymbol(id.name, this.type.toArrayType(), id.size, esp-1);
             } else {
-                ss.addSymbol(id.name, this.type.toSingleType(), id.size);
+                esp++;
+                ss.addSymbol(id.name, this.type.toSingleType(), id.size, esp-1);
             }
         }
 

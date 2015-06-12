@@ -117,4 +117,19 @@ public class Absyn {
         }
         return null;
     }
+
+    // Stack pointer(esp) and stack management function.
+    static public int esp = 1;
+    static public int blockIdx = 0;
+    static public int labelNum = 1;
+    static public void push(int value) {
+        printWriter.println("    ADD   ESP@  1 ESP");
+        printWriter.println("    MOVE  "+value+" MEM(ESP@)");
+        esp++;
+    }
+    static public void push(String value) {
+        printWriter.println("    ADD   ESP@  1 ESP");
+        printWriter.println("    MOVE  "+value+" MEM(ESP@)");
+        esp++;
+    }
 }

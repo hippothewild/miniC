@@ -16,7 +16,7 @@ public class FunctionScope {
     }
 
     public void addSymbol(Type type, int length) {
-        Symbol symbol = new Symbol(type, length, RoleName.PARAMETER);
+        Symbol symbol = new Symbol(type, length, RoleName.PARAMETER, 0);
         paramList.add(symbol);
     }
 }

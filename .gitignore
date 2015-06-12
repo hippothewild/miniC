@@ -5,6 +5,7 @@ Yylex.java
 parser.java
 sym.java
 Example/
+.idea/
 
 # Sample C file
 sample.c
