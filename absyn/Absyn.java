@@ -122,6 +122,8 @@ public class Absyn {
     static public int esp = 1;
     static public int blockIdx = 0;
     static public int labelNum = 1;
+
+    // Push some value(raw value or value in other mem) to stack.
     static public void push(int value) {
         printWriter.println("    ADD SP@ 1 SP");
         printWriter.println("    MOVE " + value + " MEM(SP@)");
@@ -132,12 +134,14 @@ public class Absyn {
         printWriter.println("    MOVE " + value + " MEM(SP@)");
         esp++;
     }
-    static public void pop(int value) {
-        printWriter.println("    MOVE MEM(SP@)@ " + value);
+
+    // Pop value from stack and take down stack pointer.
+    static public void pop(int address) {
+        printWriter.println("    MOVE MEM(SP@)@ " + address);
         printWriter.println("    SUB SP@ 1 SP");
     }
-    static public void pop(String value) {
-        printWriter.println("    MOVE MEM(SP@)@ " + value);
+    static public void pop(String address) {
+        printWriter.println("    MOVE MEM(SP@)@ " + address);
         printWriter.println("    SUB SP@ 1 SP");
     }
 }

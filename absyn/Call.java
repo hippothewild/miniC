@@ -68,7 +68,7 @@ public class Call extends Expr {
             }
 
             for (int i = blockIdx; i >= 1; i--) {
-                // Push all values in VR.
+                // Push all values in VR to memory.
                 push("VR(" + i + ")@");
             }
 
@@ -97,7 +97,7 @@ public class Call extends Expr {
             push("LABEL" + returnLabelNum);
             push("FP@");
             printWriter.println("    MOVE SP@ FP");
-            printWriter.println("    JMP   " + this.name);
+            printWriter.println("    JMP " + this.name);
             printWriter.println("LAB LABEL" + returnLabelNum);
             printWriter.println("    SUB SP@ " + (fs.paramList.size()+1) + " SP");
 

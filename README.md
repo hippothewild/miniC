@@ -72,6 +72,12 @@ Manual of CUP(in Korean): https://wiki.kldp.org/wiki.php/CUPManual
 Skeleton code with Java-CUP and JLex: https://github.com/gmh33/Java-CUP-jLex-Example  
 Resolving Dangling-else Problem: http://www.parsifalsoft.com/ifelse.html  
 
+Reports
+-------
+`sample.T` : Sample T-Machine Code (Testing `24_floating.point.c`)  
+`sample.T.stat` : Sample T-Machine p/g running statistics (Testing `24_floating.point.c`)  
+`AR.md` : Short description of AR(activation record) template  
+
 Copyright
 -------
 Jihwan Chun  

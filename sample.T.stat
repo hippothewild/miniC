@@ -1,0 +1,34 @@
+//////////////   Statistics   //////////////////////
+
+# of Instruction (Program Size) :: 81
+# of Instruction Execution  :        67
+
+
+AREA [        SP] Read Overhead : 1  Write Overhead 1
+   Memory Usage  :         1
+           Read  :        23
+          WRITE  :        14
+
+AREA [        FP] Read Overhead : 1  Write Overhead 1
+   Memory Usage  :         1
+           Read  :        10
+          WRITE  :         5
+
+AREA [        VR] Read Overhead : 1  Write Overhead 1
+   Memory Usage  :         2
+           Read  :        25
+          WRITE  :        26
+
+AREA [       MEM] Read Overhead : 1  Write Overhead 1
+   Memory Usage  :        10
+           Read  :         8
+          WRITE  :        13
+
+
+
+ Sum of All Memory Segment ....
+         Memory Usage  :        14
+       Read Overhead  :        66
+      Write Overhead  :        58
+
+////////////////////////////////////////////////////
