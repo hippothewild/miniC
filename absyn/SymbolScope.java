@@ -14,7 +14,12 @@ public class SymbolScope {
     }
 
     public void addSymbol(String symbolName, Type type, int length, int address) {
-        Symbol symbol = new Symbol(type, length, RoleName.VARIABLE, address);
+        Symbol symbol;
+        if (this.scopeName.equals("GLOBAL")) {
+            symbol = new Symbol(type, length, RoleName.GLOBAL, address);
+        } else {
+            symbol = new Symbol(type, length, RoleName.VARIABLE, address);
+        }
         symbolMap.put(symbolName, symbol);
     }
 

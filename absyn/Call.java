@@ -103,7 +103,7 @@ public class Call extends Expr {
 
             for (int i = 1; i <= blockIdx; i++) {
                 // Pop all values in VR.
-                pop("VR(" + i + ")@");
+                pop("VR(" + i + ")");
             }
 
             c.setType(fs.type.typeName);

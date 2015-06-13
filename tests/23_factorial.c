@@ -5,6 +5,6 @@ int factorial(int x) {
 }
 
 int main(){
-    factorial(4);
+    printf(factorial(10));
 	return 0;	
 }

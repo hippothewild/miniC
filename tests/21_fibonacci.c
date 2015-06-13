@@ -9,11 +9,12 @@ int Fibonacci(int n) {
 
 int main() {
 	int n, i, c, k; 
-	n = 5;
+	n = 15;
 	i = 1;
 	for ( c = 1 ; c <= n ; c = c + 1 )
 	{
 		k = Fibonacci(i);
+		printf(k);
 		i = i + 1; 
 	}
 

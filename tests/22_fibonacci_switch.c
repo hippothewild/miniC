@@ -16,6 +16,7 @@ int main() {
 	for ( c = 1 ; c <= n ; c = c + 1 ) {
 		k = Fibonacci(i);
 		i = i + 1; 
+		printf(k);
 	}
 
 	return 0;

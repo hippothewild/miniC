@@ -9,5 +9,6 @@ int main() {
 	float x,  y;
 	x = 2.3 * 12;
 	y = f1(x);
+	printf(y);
 	return 0;
 }
