@@ -42,7 +42,7 @@ public class CaseBlock extends Absyn {
             int caseStmtLabelNum = previousLabelNum;
             labelNum++;
             blockIdx++;
-            for (CaseStmt s : c.caseList.caseList) {
+            for (CaseStmt s : this.caseList.caseList) {
                 caseStmtLabelNum++;
                 printWriter.println("    SUB VR(0)@ " + s.num + " VR(" + blockIdx + ")");
                 printWriter.println("    JMPZ VR(" + blockIdx + ")@ LABEL" + caseStmtLabelNum);
@@ -56,7 +56,7 @@ public class CaseBlock extends Absyn {
         } else {
             blockIdx++;
             int caseStmtLabelNum = previousLabelNum;
-            for (CaseStmt s : c.caseList.caseList) {
+            for (CaseStmt s : this.caseList.caseList) {
                 caseStmtLabelNum++;
                 printWriter.println("    SUB VR(0)@ " + s.num + " VR(" + blockIdx + ")");
                 printWriter.println("    JMPZ VR(" + blockIdx + ")@ LABEL" + caseStmtLabelNum);

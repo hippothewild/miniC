@@ -70,10 +70,10 @@ public class BinaryExpr extends Expr {
         b.rhs = this.rhs.semanticAnalysis();
         b.typeCheck();
 
-        if (this.getType() == TypeName.FLOAT) {
+        if (b.getType() == TypeName.FLOAT) {
             floatPrefix = "F";
         }
-        switch (this.binOp) {
+        switch (b.binOp) {
         case PLUS:
             tOperator = floatPrefix + "ADD";
             break;

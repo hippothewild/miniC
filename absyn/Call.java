@@ -42,11 +42,19 @@ public class Call extends Expr {
                     printWriter.println("    MOVE VR(0)@ VR(" + blockIdx + ")");
                     s.tGetValue();
                     printWriter.println("    ADD MEM(VR(0)@)@ VR(" + blockIdx + ")@ VR(0)");
-                    printWriter.println("    READ MEM(VR(0)@)");
+                    if (s.type.toSingleType().typeName == TypeName.FLOAT) {
+                        printWriter.println("    READF MEM(VR(0)@)");
+                    } else {
+                        printWriter.println("    READI MEM(VR(0)@)");
+                    }
                     blockIdx--;
                 } else {
                     s.tGetValue();
-                    printWriter.println("    READ MEM(VR(0)@)");
+                    if (s.type.toSingleType().typeName == TypeName.FLOAT) {
+                        printWriter.println("    READF MEM(VR(0)@)");
+                    } else {
+                        printWriter.println("    READI MEM(VR(0)@)");
+                    }
                 }
             } else {
                 raiseError(SEMANTIC_ERR, "Got non-variable in scanf");

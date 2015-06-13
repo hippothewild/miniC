@@ -25,14 +25,13 @@ public class Assign extends Absyn {
 
     public Assign semanticAnalysis() {
         // Do semantic check for given assign.
+        Assign a = new Assign(name, null, null);
         Symbol sym = getSymbolFromSymbolTable(this.name);
         if (sym == null) {
             raiseError(SEMANTIC_ERR, "Variable " + this.name + " is not declared.");
         }
 
-        Assign a = new Assign(name, null, null);
         a.expr = this.expr.semanticAnalysis();
-
         printWriter.println("    MOVE VR(0)@ VR(" + (blockIdx+1) + ")");
         blockIdx++;
 
@@ -42,7 +41,6 @@ public class Assign extends Absyn {
             }
 
             a.index = this.index.semanticAnalysis();
-
             printWriter.println("    MOVE VR(0)@ VR(" + (blockIdx+1) + ")");
             blockIdx++;
             sym.tGetValue();

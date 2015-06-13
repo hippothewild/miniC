@@ -26,6 +26,8 @@ public class Symbol extends Absyn {
     public void tGetValue() {
         switch (role) {
         case VARIABLE:
+            printWriter.println("    ADD FP@ " + address + " VR(0)");
+            break;
         case PARAMETER:
             printWriter.println("    ADD FP@ " + address + " VR(0)");
             break;
